@@ -34,7 +34,7 @@ $this->title = 'zVintauge | Blog';
 									</div>
 									<div class="entry-content">
 										<p><?= $article->description;?></p>
-										<center><a class="button " href="<?= Url::toRoute(['site/view', 'id'=>$article->id])?>">Read More</a></center>
+										<center><a class="button " href="<?= Url::toRoute(['site/view', 'slug'=>$article->slug])?>">Read More</a></center>
 									</div>
 									<div class="viewed"> 
 										<p class="viewed-1 border-view">&#128065</p> 

@@ -129,20 +129,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView($slug)
     {
-        // $article = Article::find()->where(['slug'=>$slug])->one();
-        // $comments = $article->getArticleComments();
-        // $commentForm = new CommentForm();
-        // $article->viewedCount();
-
-        // return $this->render('single', [
-        //     'article'=>$article,
-        //     'comments'=>$comments,
-        //     'commentForm'=>$commentForm
-        // ]);
-
-        $article = Article::findOne($id);
+        $article = Article::find()->where(['slug'=>$slug])->one();
         $comments = $article->getArticleComments();
         $commentForm = new CommentForm();
         $article->viewedCount();
@@ -152,6 +141,17 @@ class SiteController extends Controller
             'comments'=>$comments,
             'commentForm'=>$commentForm
         ]);
+
+        // $article = Article::findOne($id);
+        // $comments = $article->getArticleComments();
+        // $commentForm = new CommentForm();
+        // $article->viewedCount();
+
+        // return $this->render('single', [
+        //     'article'=>$article,
+        //     'comments'=>$comments,
+        //     'commentForm'=>$commentForm
+        // ]);
     }
 
     public function actionCategory($id)
@@ -176,7 +176,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionComment($id)
+    public function actionComment($id, $slug)
     {
         $model = new CommentForm();
         
@@ -186,7 +186,7 @@ class SiteController extends Controller
             if($model->saveComment($id))
             {
                 Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
-                return $this->redirect(['site/view','id'=>$id]);
+                return $this->redirect(['site/view','slug'=>$slug]);
             }
         }
     }
