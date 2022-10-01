@@ -141,17 +141,6 @@ class SiteController extends Controller
             'comments'=>$comments,
             'commentForm'=>$commentForm
         ]);
-
-        // $article = Article::findOne($id);
-        // $comments = $article->getArticleComments();
-        // $commentForm = new CommentForm();
-        // $article->viewedCount();
-
-        // return $this->render('single', [
-        //     'article'=>$article,
-        //     'comments'=>$comments,
-        //     'commentForm'=>$commentForm
-        // ]);
     }
 
     public function actionCategory($id)
