@@ -17,7 +17,6 @@ class CommentController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
