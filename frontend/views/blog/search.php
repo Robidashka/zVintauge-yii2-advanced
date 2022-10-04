@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 
-$this->title = 'zVintauge | Category';
+$this->title = 'zVintauge | Search: '. $search;
 ?>
 <div class="wrap-body">
 	<section id="container">
@@ -17,7 +17,7 @@ $this->title = 'zVintauge | Category';
 					<div class="row">
 						<article class="single-post zerogrid">
 							<div class="search11">
-								<form action="<?= Url::to(['site/search']); ?>" method="get" class="search1">
+								<form action="<?= Url::to(['blog/search']); ?>" method="get" class="search1">
 									<input type="text" class="search" name="search" placeholder="Search">
                                     <input type="submit" name="submit" class="submit" value="Search">
 								</form>
@@ -26,15 +26,15 @@ $this->title = 'zVintauge | Category';
 								<div class="row wrap-post">
 									<div class="entry-header">
 										<span class="time"><?= $article->getDate();?> by <?= $article->author->username;?></span>
-										<h2 class="entry-title"><a href="<?= Url::toRoute(['site/view', 'id'=>$article->id])?>"><?= $article->title;?></a></h2>
-										<span class="cat-links"><a href="<?= Url::toRoute(['site/category', 'id' => $article->category->id]);?>"><?= $article->category->title;?></a></span>
+										<h2 class="entry-title"><a href="<?= Url::toRoute(['view/view', 'id'=>$article->id])?>"><?= $article->title;?></a></h2>
+										<span class="cat-links"><a href="<?= Url::toRoute(['blog/category', 'id' => $article->category->id]);?>"><?= $article->category->title;?></a></span>
 									</div>
 									<div class="post-thumbnail-wrap">
 										<img src="<?= $article->getImage();?>">
 									</div>
 									<div class="entry-content">
 										<p><?= $article->description;?></p>
-										<center><a class="button " href="<?= Url::toRoute(['site/view', 'slug'=>$article->slug])?>">Read More</a></center>
+										<center><a class="button " href="<?= Url::toRoute(['view/view', 'slug'=>$article->slug])?>">Read More</a></center>
 									</div>
 									<div class="viewed"> 
 										<p class="viewed-1 border-view">&#128065</p> 

@@ -42,9 +42,10 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '<action:(login|logout|signup)>' => 'auth/<action>',
-                '<action:(about|contact|blog|view|category|tag)>' => 'site/<action>',
+                '<action:(about)>' => 'site/<action>',
+                '<action:(blog|category|search)>' => 'blog/<action>',
+                '<action:(view)>' => 'view/<action>',
                 '<action:(/)>' => 'site/<action>',
-                'search' => 'site/search',
                 // 'status/view/<id:\d+>' => 'status/view',  
 
             ],

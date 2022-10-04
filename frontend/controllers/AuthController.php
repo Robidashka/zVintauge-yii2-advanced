@@ -21,8 +21,7 @@ public function actionLogin()
             return $this->goBack();
         }
 
-//        $model->password = '';
-        return $this->render('/site/login', [
+        return $this->render('/auth/login', [
             'model' => $model,
         ]);
     }
@@ -47,7 +46,7 @@ public function actionLogin()
             }
         }
         
-        return $this->render('/site/signup', [
+        return $this->render('/auth/signup', [
             'model'=>$model
         ]);
     }

@@ -22,7 +22,7 @@
             </div>
         <?php endif;?>
         <?php $form = \yii\widgets\ActiveForm::begin([
-            'action'=>['site/comment', 'id'=>$article->id, 'slug'=>$article->slug],
+            'action'=>['view/comment', 'id'=>$article->id, 'slug'=>$article->slug],
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
         <div class="form-group">
             <div class="col-md-12">

@@ -17,7 +17,7 @@ $this->title = 'Single';?>
 							<div class="entry-header">
 								<span class="time"><?= $article->getDate();?>  by <?= $article->author->username;?></span>
 								<h2 class="entry-title"><a><?= $article->title;?></a></h2>
-								<span class="cat-links"><a href="<?= Url::toRoute(['site/category', 'id' => $article->category->id]);?>"><?= $article->category->title;?></a></span>
+								<span class="cat-links"><a href="<?= Url::toRoute(['blog/category', 'id' => $article->category->id]);?>"><?= $article->category->title;?></a></span>
 							</div>
 							<div class="post-thumbnail-wrap">
 								<img src="<?= $article->getImage();?>">

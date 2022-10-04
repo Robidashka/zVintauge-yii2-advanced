@@ -17,7 +17,7 @@ use frontend\models\CommentForm;
 use yii\data\ActiveDataProvider;
 
 
-class SiteController extends Controller
+class ViewController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -61,25 +61,32 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionView($slug)
     {
+        $article = Article::find()->where(['slug'=>$slug])->one();
+        $comments = $article->getArticleComments();
+        $commentForm = new CommentForm();
+        $article->viewedCount();
 
-        $articles = Article::find()->all();
-        return $this->render('index',['articles' => $articles]);
+        return $this->render('single', [
+            'article'=>$article,
+            'comments'=>$comments,
+            'commentForm'=>$commentForm
+        ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
+    public function actionComment($id, $slug)
     {
-        return $this->render('about');
+        $model = new CommentForm();
+        
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
+                return $this->redirect(['view/view','slug'=>$slug]);
+            }
+        }
     }
 }
