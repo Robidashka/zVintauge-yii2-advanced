@@ -71,7 +71,7 @@ class ArticleController extends BackendController
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user;
+            $model->user_id = Yii::$app->user->id;
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -91,7 +91,9 @@ class ArticleController extends BackendController
     {
         $model = $this->findModel($id);
         
-        if ($model->load(Yii::$app->request->post()) && $model->saveArticle()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->id;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

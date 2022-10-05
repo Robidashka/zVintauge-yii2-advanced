@@ -92,12 +92,6 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    public function saveArticle()
-    {
-        $this->user_id = Yii::$app->user->id;
-        return $this->save(false);
-    }
-
     public function saveImage($filename)
     {
         $this->image = $filename;
