@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-//use andrewdanilov\adminpanel\controllers\BackendController;
 use common\models\Comment;
 use yii\web\Controller;
 use yii\filters\AccessControl;

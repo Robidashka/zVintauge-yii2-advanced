@@ -7,32 +7,13 @@ use Yii;
 const COMMENT_ALLOWED = 1;
 const COMMENT_DISALLOWED = 0;
 
-/**
- * This is the model class for table "comment".
- *
- * @property int $id
- * @property string|null $text
- * @property int|null $user_id
- * @property int|null $article_id
- * @property int|null $status
- * @property string|null $date
- *
- * @property Article $article
- * @property User $user
- */
 class Comment extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'comment';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -44,9 +25,6 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -59,21 +37,11 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[Article]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getArticle()
     {
         return $this->hasOne(Article::className(), ['id' => 'article_id']);
     }
 
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);

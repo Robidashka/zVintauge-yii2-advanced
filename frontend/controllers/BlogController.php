@@ -19,9 +19,6 @@ use yii\data\ActiveDataProvider;
 
 class BlogController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -45,9 +42,6 @@ class BlogController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function actions()
     {
         return [
