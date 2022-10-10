@@ -9,24 +9,8 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use dvizh\seo\models\Seo;
 
-/**
- * This is the model class for table "article".
- *
- * @property integer $id
- * @property string $title
- * @property string $description
- * @property string $content
- * @property string $date
- * @property string $image
- * @property integer $viewed
- * @property integer $user_id
- * @property integer $status
- * @property integer $category_id
- *
- * @property ArticleTag[] $articleTags
- * @property Comment[] $comments
- */
 class Article extends \yii\db\ActiveRecord
 {
     /**
@@ -52,8 +36,11 @@ class Article extends \yii\db\ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                // если вместо метки времени UNIX используется datetime:
                 'value' => new Expression('NOW()'),
+            ],
+
+            'seo' => [
+                'class' => 'dvizh\seo\behaviors\SeoFields',
             ],
         ];
     }
