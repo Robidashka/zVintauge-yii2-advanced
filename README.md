@@ -1,4 +1,23 @@
 <h1>zVintauge-yii2(advanced)</h1><br>
-В репозитории "<a href="https://github.com/Robidashka/Archive">Archive</a>" есть 7z архив со всеми остальными файлами.
 
-Upd: Пофиксил конфликт между комментариями и slug'ами. Других ошибко я не заметил.
+<h2>Установка</h2>
+```
+git clone https://github.com/Robidashka/zVintauge-yii2-advanced.git
+```
+```
+composer install
+```
+```
+php init
+```
+<h2>Настроить подключение к БД</h2>
+
+```
+php yii migrate --migrationPath=@andrewdanilov/adminpanel/migrations
+```
+```
+php yii migrate --migrationPath=vendor/dvizh/yii2-seo/src/migrations
+```
+```
+php yii migrate
+```
