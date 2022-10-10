@@ -17,14 +17,15 @@ class m220721_103127_create_comment_table extends Migration
             'text'=>$this->string(),
             'user_id'=>$this->integer(),
             'article_id'=>$this->integer(),
-            'status'=>$this->integer()
+            'status'=>$this->integer(),
+            'date'=>$this->dateTime()->notNull(),
         ]);
         
         // creates index for column `user_id`
         $this->createIndex(
             'idx-post-user_id',
             'comment',
-            'user_id'
+            'user_id',
         );
 
         // add foreign key for table `user`
@@ -34,15 +35,15 @@ class m220721_103127_create_comment_table extends Migration
             'user_id',
             'user',
             'id',
-            'CASCADE'
-            'CASCADE'
+            'CASCADE',
+            'CASCADE',
         );
 
         // creates index for column `article_id`
         $this->createIndex(
             'idx-article_id',
             'comment',
-            'article_id'
+            'article_id',
         );
 
         // add foreign key for table `article`
@@ -52,8 +53,8 @@ class m220721_103127_create_comment_table extends Migration
             'article_id',
             'article',
             'id',
-            'CASCADE'
-            'CASCADE'
+            'CASCADE',
+            'CASCADE',
         );
     }
 

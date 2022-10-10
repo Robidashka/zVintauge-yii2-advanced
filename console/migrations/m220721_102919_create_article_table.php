@@ -26,6 +26,22 @@ class m220721_102919_create_article_table extends Migration
             'status'=>$this->integer(),
             'category_id'=>$this->integer(),
         ]);
+        
+        $this->createIndex(
+            'idx-category_id',
+            'article',
+            'category_id',
+        );
+
+        $this->addForeignKey(
+            'fk-category_id',
+            'article',
+            'category_id',
+            'category',
+            'id',
+            'CASCADE',
+            'CASCADE',
+        );
     }
 
     /**
@@ -33,6 +49,16 @@ class m220721_102919_create_article_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey(
+            'fk-category_id',
+            'article',
+        );
+
+        $this->dropIndex(
+            'idx-category_id',
+            'article',
+        );
+
         $this->dropTable('article');
     }
 }
