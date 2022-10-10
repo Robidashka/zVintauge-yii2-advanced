@@ -1,15 +1,9 @@
 <h1>zVintauge-yii2(advanced)</h1><br>
 
 <h2>Установка</h2>
-```
 git clone https://github.com/Robidashka/zVintauge-yii2-advanced.git
-```
-```
 composer install
-```
-```
 php init
-```
 <h2>Настроить подключение к БД</h2>
 
 ```
