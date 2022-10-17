@@ -2,31 +2,31 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-// use dvizh\seo\models\Seo;
+use dvizh\seo\models\Seo;
 
-// if(!$title = $model->seo->title) {
-// 	$title = "Статья {$seo->title}";
-// }
+if(!$title = $article->seo->title) {
+	$title = "Статья {$seo->title}";
+}
 
-// if(!$description = $model->seo->description) {
-// 	$description = "{$seo->description}";
-// }
+if(!$description = $article->seo->description) {
+	$description = "{$seo->description}";
+}
 
-// if(!$keywords = $model->seo->keywords) {
-// 	$keywords = '';
-// }
+if(!$keywords = $article->seo->keywords) {
+	$keywords = '';
+}
 
-// $this->title = $title;
+$this->title = $title;
 
-// $this->registerMetaTag([
-// 	'name' => 'description',
-// 	'content' => $description,
-// ]);
+$this->registerMetaTag([
+	'name' => 'description',
+	'content' => $description,
+]);
 
-// $this->registerMetaTag([
-// 	'name' => 'keywords',
-// 	'content' => $keywords,
-// ]);
+$this->registerMetaTag([
+	'name' => 'keywords',
+	'content' => $keywords,
+]);
 
 $this->title = 'Single';?>
 <section id="container">

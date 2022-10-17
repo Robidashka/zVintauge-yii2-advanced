@@ -113,7 +113,7 @@ class ArticleController extends BackendController
     public function actionSetCategory($id)
     {
         $article = $this->findModel($id);
-        $selectedCategory = $article->category->id;
+        $selectedCategory = $article->category_id;
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
 
         if(Yii::$app->request->isPost)

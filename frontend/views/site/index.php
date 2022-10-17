@@ -39,7 +39,7 @@ $this->title = 'Home';?>
 									<div class="entry-content t-center">
 										<h3><?= $article->title;?></h3>
 										<p><?= $article->description;?></p>
-										<a class="button" href="<?= Url::toRoute(['view/view', 'slug'=>$article->slug])?>">Read More</a>
+										<a class="button" href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>">Read More</a>
 									</div>
 								</div>
 							</article>

@@ -35,23 +35,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'description',
                 'format' => 'html',
             ],
-            [
-                'attribute' => 'content',
-                'format' => 'html',
-                //'format' => 'ntext',
-            ],
+            // [
+            //     'attribute' => 'content',
+            //     'format' => 'html',
+            // ],
             'created_at',
-            //'updated_at',
-            [
-                'format' => 'html',
-                'label' => 'Изображение',
-                'value' => function($data){
-                    return Html::img($data->getImage(), ['width'=>200]);
-                }
-            ],
+            'updated_at',
+            'viewed',
+            'user_id',
+            // [
+            //     'format' => 'html',
+            //     'label' => 'Изображение',
+            //     'value' => function($data){
+            //         return Html::img($data->getImage(), ['width'=>200]);
+            //     }
+            // ],
             //'image',
-            //'viewed',
-            //'user_id',
             //'status',
             //'category_id',
             [

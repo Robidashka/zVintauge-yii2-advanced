@@ -45,7 +45,7 @@ return [
                 '<action:(login|logout|signup)>' => 'auth/<action>',
                 '<action:(about)>' => 'site/<action>',
                 '<action:(blog|category|search)>' => 'blog/<action>',
-                '<action:(view)>' => 'view/<action>',
+                '<action:(post)>' => 'post/<action>',
                 '<action:(/)>' => 'site/<action>',
                 // 'status/view/<id:\d+>' => 'status/view',  
 

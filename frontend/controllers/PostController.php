@@ -17,7 +17,7 @@ use frontend\models\CommentForm;
 use yii\data\ActiveDataProvider;
 
 
-class ViewController extends Controller
+class PostController extends Controller
 {
     public function behaviors()
     {
@@ -55,7 +55,7 @@ class ViewController extends Controller
         ];
     }
 
-    public function actionView($slug)
+    public function actionPost($slug)
     {
         $article = Article::find()->where(['slug'=>$slug])->one();
         $comments = $article->getArticleComments();
@@ -79,7 +79,7 @@ class ViewController extends Controller
             if($model->saveComment($id))
             {
                 Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
-                return $this->redirect(['view/view','slug'=>$slug]);
+                return $this->redirect(['view/post','slug'=>$slug]);
             }
         }
     }

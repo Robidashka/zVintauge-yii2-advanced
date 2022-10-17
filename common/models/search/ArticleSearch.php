@@ -18,7 +18,7 @@ class ArticleSearch extends Article
     {
         return [
             [['id', 'viewed', 'user_id', 'status', 'category_id'], 'integer'],
-            [['title', 'description', 'content', 'created_at', 'image'], 'safe'],
+            [['title', 'description', 'content', 'created_at', 'updated_at','image'], 'safe'],
         ];
     }
 
@@ -68,6 +68,7 @@ class ArticleSearch extends Article
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'image', $this->image]);
 
