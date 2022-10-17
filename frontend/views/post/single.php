@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use dvizh\seo\models\Seo;
 
 if(!$title = $article->seo->title) {
-	$title = "Статья {$seo->title}";
+	$title = "{$seo->title}";
 }
 
 if(!$description = $article->seo->description) {
@@ -15,8 +15,6 @@ if(!$description = $article->seo->description) {
 if(!$keywords = $article->seo->keywords) {
 	$keywords = '';
 }
-
-$this->title = $title;
 
 $this->registerMetaTag([
 	'name' => 'description',
@@ -28,7 +26,7 @@ $this->registerMetaTag([
 	'content' => $keywords,
 ]);
 
-$this->title = 'Single';?>
+$this->title = $title;?>
 <section id="container">
 	<div class="wrap-container">
 		<!-----------------Content-Box-------------------->
