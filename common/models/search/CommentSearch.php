@@ -4,15 +4,15 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Category;
+use common\models\Comment;
 
-class CategorySearch extends Category
+class CommentSearch extends Comment
 {
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['title'], 'safe'],
+            [['id', 'user_id', 'article_id', 'status'], 'integer'],
+            [['text', 'date'], 'safe'],
         ];
     }
 
@@ -23,9 +23,11 @@ class CategorySearch extends Category
 
     public function search($params)
     {
-        $query = Category::find();
+        $query = Comment::find();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['status'=>SORT_ASC]],
         ]);
 
         $this->load($params);
@@ -38,9 +40,13 @@ class CategorySearch extends Category
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
+            'article_id' => $this->article_id,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'date', $this->date]);
 
         return $dataProvider;
     }

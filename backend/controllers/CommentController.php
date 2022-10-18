@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Comment;
+use common\models\search\CommentSearch;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -32,15 +33,21 @@ class CommentController extends Controller
 
     public function actionIndex()
     {
-        $comments = Comment::find()->orderBy('id desc')->all();
-        
-        return $this->render('index',['comments'=>$comments]);
+        $comments = Comment::find()->orderBy('status asc')->all();
+        $searchModel = new CommentSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'comments'=>$comments,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionDelete($id)
     {
         $comment = Comment::findOne($id);
-        if($comment->delete())
+        if($comment->archived())
         {
             return $this->redirect(['comment/index']);
         }

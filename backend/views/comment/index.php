@@ -3,10 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\CategorySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use yii\grid\ActionColumn;
 
 $this->title = 'Коментарии';
 $this->params['breadcrumbs'][] = $this->title;
@@ -46,6 +43,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php endforeach;?>
             </tbody>
         </table>
+
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                'text',
+                'user_id',
+                'article_id',  
+                'date',
+                  [
+                'label' => 'Статус',
+                'value' => function($data){
+                    return $data->getStatusLabel();
+                }
+            ],
+                [
+                    'class' => ActionColumn::className(),
+                    'urlCreator' => function ($action, $model, $key, $index, $column) {
+                        return Url::toRoute([$action, 'id' => $model->id]);
+                    }
+                ],    
+            ],
+        ]) ?>
 
     <?php endif;?>
 </div>

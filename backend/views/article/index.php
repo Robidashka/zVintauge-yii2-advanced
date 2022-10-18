@@ -5,10 +5,6 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticleSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Статьи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

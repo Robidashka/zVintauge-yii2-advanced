@@ -79,7 +79,7 @@ class PostController extends Controller
             if($model->saveComment($id))
             {
                 Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
-                return $this->redirect(['view/post','slug'=>$slug]);
+                return $this->redirect(['post/post','slug'=>$slug]);
             }
         }
     }
