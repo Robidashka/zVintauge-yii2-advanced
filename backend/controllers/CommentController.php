@@ -44,7 +44,7 @@ class CommentController extends Controller
         ]);
     }
 
-    public function actionDelete($id)
+    public function actionArchiv($id)
     {
         $comment = Comment::findOne($id);
         if($comment->archived())
@@ -57,15 +57,6 @@ class CommentController extends Controller
     {
         $comment = Comment::findOne($id);
         if($comment->allow())
-        {
-            return $this->redirect(['comment/index']);
-        }
-    }
-    
-    public function actionDisallow($id)
-    {
-        $comment = Comment::findOne($id);
-        if($comment->disallow())
         {
             return $this->redirect(['comment/index']);
         }

@@ -6,15 +6,13 @@ use Yii;
 
     const COMMENT_DRAFT = 0;
     const COMMENT_ALLOWED = 1;
-    const COMMENT_DISALLOWED = 2;
-    const COMMENT_ARCHIVED = 4;
+    const COMMENT_ARCHIVED = 2;
 
 class Comment extends \yii\db\ActiveRecord
 {
     const COMMENT_DRAFT = 0;
     const COMMENT_ALLOWED = 1;
-    const COMMENT_DISALLOWED = 2;
-    const COMMENT_ARCHIVED = 4;
+    const COMMENT_ARCHIVED = 2;
 
     public static function tableName()
     {
@@ -48,7 +46,6 @@ class Comment extends \yii\db\ActiveRecord
         return [
             self::COMMENT_DRAFT => 'На рассмотрении',
             self::COMMENT_ALLOWED => 'Разрешен',
-            self::COMMENT_DISALLOWED => 'Запрещён',
             self::COMMENT_ARCHIVED => 'В архиве',
         ];
     }
@@ -86,12 +83,6 @@ class Comment extends \yii\db\ActiveRecord
     public function allow()
     {
         $this->status = COMMENT_ALLOWED;
-        return $this->save(false);
-    }
-
-    public function disallow()
-    {
-        $this->status = COMMENT_DISALLOWED;
         return $this->save(false);
     }
 }

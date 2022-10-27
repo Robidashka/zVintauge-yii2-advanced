@@ -32,12 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?= $comment->user->username?></td>
                         <td><?= $comment->text?></td>
                         <td>
-                            <?php if($comment->isAllowed()):?>
-                                <a class="btn btn-warning" href="<?= Url::toRoute(['comment/disallow', 'id'=>$comment->id]);?>">Запретить</a>
+                            <?php if($comment->status == 0):?>
+                                <a class="btn btn-success" href="<?= Url::toRoute(['comment/allow', 'id'=>$comment->id]);?>">Разрешать</a>
+                                <a class="btn btn-danger" href="<?= Url::toRoute(['comment/archiv', 'id'=>$comment->id]); ?>">Удалить</a>
+                            <?php elseif($comment->status == 1):?>
+                                <a class="btn btn-danger" href="<?= Url::toRoute(['comment/archiv', 'id'=>$comment->id]); ?>">Удалить</a>
                             <?php else:?>
                                 <a class="btn btn-success" href="<?= Url::toRoute(['comment/allow', 'id'=>$comment->id]);?>">Разрешать</a>
                             <?php endif?>
-                            <a class="btn btn-danger" href="<?= Url::toRoute(['comment/delete', 'id'=>$comment->id]); ?>">Удалить</a>
                         </td>
                     </tr>
                 <?php endforeach;?>
@@ -50,17 +52,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
+                [
+                    'label' => 'Статус',
+                    'value' => function($data){
+                        return $data->getStatusLabel();
+                    }
+                ],
                 'id',
                 'text',
                 'user_id',
                 'article_id',  
                 'date',
-                  [
-                'label' => 'Статус',
-                'value' => function($data){
-                    return $data->getStatusLabel();
-                }
-            ],
                 [
                     'class' => ActionColumn::className(),
                     'urlCreator' => function ($action, $model, $key, $index, $column) {

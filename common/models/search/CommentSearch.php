@@ -11,7 +11,7 @@ class CommentSearch extends Comment
     public function rules()
     {
         return [
-            [['id', 'user_id', 'article_id', 'status'], 'integer'],
+            [['id', 'user_id', 'article_id'], 'integer'],
             [['text', 'date'], 'safe'],
         ];
     }
@@ -42,7 +42,6 @@ class CommentSearch extends Comment
             'id' => $this->id,
             'user_id' => $this->user_id,
             'article_id' => $this->article_id,
-            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'text', $this->text]);
