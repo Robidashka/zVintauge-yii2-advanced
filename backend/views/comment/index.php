@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
 
-    <h1>Коментарии</h1>
+    <h1>Комментарии</h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php if(!empty($comments)):?>

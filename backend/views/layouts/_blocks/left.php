@@ -14,7 +14,7 @@ use andrewdanilov\adminpanel\widgets\Menu;
 		['label' => 'Панель управления', 'url' => ['/site/index']],
 		['label' => 'Статьи', 'url' => ['/article/index']],
 		['label' => 'Категории', 'url' => ['/category/index']],
-		['label' => 'Коммментарии', 'url' => ['/comment/index']],
+		['label' => 'Комментарии', 'url' => ['/comment/index']],
 		['label' => 'Пользователи', 'url' => ['/user/index']],
 	]]) ?>
 </div>
