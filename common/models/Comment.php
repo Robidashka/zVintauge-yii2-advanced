@@ -4,10 +4,6 @@ namespace common\models;
 
 use Yii;
 
-    const COMMENT_DRAFT = 0;
-    const COMMENT_ALLOWED = 1;
-    const COMMENT_ARCHIVED = 2;
-
 class Comment extends \yii\db\ActiveRecord
 {
     const COMMENT_DRAFT = 0;
@@ -35,8 +31,8 @@ class Comment extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'text' => 'Текст',
-            'user_id' => 'ID пользователя',
-            'article_id' => 'ID статьи',
+            'user_id' => 'Пользователь',
+            'article_id' => 'Статья',
             'status' => 'Статус',
             'date' => 'Дата',
         ];
@@ -48,6 +44,13 @@ class Comment extends \yii\db\ActiveRecord
             self::COMMENT_ALLOWED => 'Разрешен',
             self::COMMENT_ARCHIVED => 'В архиве',
         ];
+    }
+
+    public static function getUserLabel() {
+        //return $this->hasOne(User::className(), ['id' => 'user_id']); ???
+    }
+
+    public static function getArticleTitle() {
     }
 
     public function getStatusLabel() {
@@ -68,21 +71,16 @@ class Comment extends \yii\db\ActiveRecord
     {
         return Yii::$app->formatter->asDate($this->date);
     }
-    
-    public function isAllowed()
-    {
-        return $this->status;
-    }
 
     public function archived()
     {
-        $this->status = COMMENT_ARCHIVED;
+        $this->status = self::COMMENT_ARCHIVED;
         return $this->save(false);
     }
 
     public function allow()
     {
-        $this->status = COMMENT_ALLOWED;
+        $this->status = self::COMMENT_ALLOWED;
         return $this->save(false);
     }
 }

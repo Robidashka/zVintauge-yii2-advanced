@@ -15,37 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if(!empty($comments)):?>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Автор</td>
-                    <td>Текст</td>
-                    <td>Действие</td>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach($comments as $comment):?>
-                    <tr>
-                        <td><?= $comment->id?></td>
-                        <td><?= $comment->user->username?></td>
-                        <td><?= $comment->text?></td>
-                        <td>
-                            <?php if($comment->status == 0):?>
-                                <a class="btn btn-success" href="<?= Url::toRoute(['comment/allow', 'id'=>$comment->id]);?>">Разрешать</a>
-                                <a class="btn btn-danger" href="<?= Url::toRoute(['comment/archiv', 'id'=>$comment->id]); ?>">Удалить</a>
-                            <?php elseif($comment->status == 1):?>
-                                <a class="btn btn-danger" href="<?= Url::toRoute(['comment/archiv', 'id'=>$comment->id]); ?>">Удалить</a>
-                            <?php else:?>
-                                <a class="btn btn-success" href="<?= Url::toRoute(['comment/allow', 'id'=>$comment->id]);?>">Разрешать</a>
-                            <?php endif?>
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
@@ -53,22 +22,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 [
-                    'label' => 'Статус',
+                    'attribute' => 'status',
                     'value' => function($data){
                         return $data->getStatusLabel();
                     }
                 ],
-                'id',
                 'text',
                 'user_id',
                 'article_id',  
                 'date',
                 [
-                    'class' => ActionColumn::className(),
-                    'urlCreator' => function ($action, $model, $key, $index, $column) {
-                        return Url::toRoute([$action, 'id' => $model->id]);
-                    }
-                ],    
+                    'attribute' => '',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        if($model->status == 0){
+                            return '<a class="btn btn-success" href="' . Url::toRoute(['comment/allow', 'id'=>$model->id]) . '">O</a>' . ' ' .
+                            '<a class="btn btn-danger" href="' . Url::toRoute(['comment/archiv', 'id'=>$model->id]) . '">X</a>';
+                        }
+                        elseif($model->status == 1){
+                            return '<a class="btn btn-danger" href="' . Url::toRoute(['comment/archiv', 'id'=>$model->id]) . '">X</a>';
+                        }
+                        else{
+                            return '<a class="btn btn-success" href="' . Url::toRoute(['comment/allow', 'id'=>$model->id]) . '">O</a>';
+                        }
+                    },
+                ],  
             ],
         ]) ?>
 
