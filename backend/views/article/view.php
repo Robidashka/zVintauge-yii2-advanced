@@ -36,9 +36,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'image',
             'viewed',
-            'user_id',
-            //'status',
-            'category_id',
+            [
+                'attribute' => 'user_id',
+                'value' => function($data) {
+                    return $data->author->username;  
+                },
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($data){
+                    return $data->getArticleStatusLabel();
+                }
+            ],
+            [
+                'attribute' => 'category_id',
+                'value' => function($data) {
+                    return $data->category->title;  
+                },
+            ],
         ],
     ]) ?>
 

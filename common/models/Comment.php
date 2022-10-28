@@ -38,7 +38,7 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getStatusesLabel() {
+    public static function getCommentStatusesLabel() {
         return [
             self::COMMENT_DRAFT => 'На рассмотрении',
             self::COMMENT_ALLOWED => 'Разрешен',
@@ -46,15 +46,8 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getUserLabel() {
-        //return $this->hasOne(User::className(), ['id' => 'user_id']); 
-    }
-
-    public static function getArticleTitle() {
-    }
-
-    public function getStatusLabel() {
-        return self::getStatusesLabel()[$this->status];
+    public function getCommentStatusLabel() {
+        return self::getCommentStatusesLabel()[$this->status];
     }
 
     public function getArticle()

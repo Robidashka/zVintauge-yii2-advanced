@@ -13,9 +13,10 @@ use dvizh\seo\models\Seo;
 
 class Article extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
+    const ARTICLE_DRAFT = 0;
+    const ARTICLE_POSTED = 1;
+    const ARTICLE_ARCHIVED = 2;
+
     public static function tableName()
     {
         return 'article';
@@ -45,9 +46,6 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
@@ -58,9 +56,6 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
@@ -73,10 +68,22 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => 'Дата изменения',
             'image' => 'Изображение',
             'viewed' => 'Просмотры',
-            'user_id' => 'ID пользователя',
+            'user_id' => 'Пользователь',
             'status' => 'Статус',
-            'category_id' => 'ID категории',
+            'category_id' => 'Категория',
         ];
+    }
+
+    public static function getArticleStatusesLabel() {
+        return [
+            self::ARTICLE_DRAFT => 'Черновик',
+            self::ARTICLE_POSTED => 'Опубликовано',
+            self::ARTICLE_ARCHIVED => 'В архиве',
+        ];
+    }
+
+    public function getArticleStatusLabel() {
+        return self::getArticleStatusesLabel()[$this->status];
     }
 
     public function saveImage($filename)

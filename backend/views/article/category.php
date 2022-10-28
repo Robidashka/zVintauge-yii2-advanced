@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+?>
 <div class="article-form">
 
     <h1>Выберете категорию</h1>

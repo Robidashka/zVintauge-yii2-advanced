@@ -1,16 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use common\models\Article;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 mihaildev\elfinder\Assets::noConflict($this);
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Article */
-/* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="article-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -24,6 +22,8 @@ mihaildev\elfinder\Assets::noConflict($this);
     <?php echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
     ]);?>
+
+    <?= $form->field($model, 'status')->dropdownList(ArrayHelper::map(Article::find()->asArray()->all(), 'status', 'status'));?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
         'model' => $model, 

@@ -22,16 +22,46 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'status',
+                'filter' => ['0' => 'Черновик', '1' => 'Опубликовано', '2' => 'В архиве'],
+                'filterInputOptions' => ['prompt' => 'Все статусы', 'class' => 'form-control', 'id' => null],
+                'value' => function($data){
+                    return $data->getArticleStatusLabel();
+                }
+            ],
             'title',
             [
                 'attribute' => 'description',
                 'format' => 'html',
             ],
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'created_at',
+                'filter' => \yii\jui\DatePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'created_at',
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                ]),
+                'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'filter' => \yii\jui\DatePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'updated_at',
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                ]),
+                'format' => ['date', 'php:Y-m-d'],
+            ],
+            [
+                'attribute' => 'user_id',
+                'value' => function($data) {
+                    return $data->author->username;  
+                },
+            ],
             'viewed',
-            'user_id',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, $model, $key, $index, $column) {

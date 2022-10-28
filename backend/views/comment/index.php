@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="category-index">
 
     <h1>Комментарии</h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php if(!empty($comments)):?>
 
@@ -42,14 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'language' => 'ru',
                         'dateFormat' => 'yyyy-MM-dd',
                     ]),
-                    'format' => ['date']
+                    'format' => ['date', 'php:Y-m-d'],
                 ],
                 [
                     'attribute' => 'status',
                     'filter' => ['0' => 'На рассмотрении', '1' => 'Разрешен', '2' => 'В архиве'],
                     'filterInputOptions' => ['prompt' => 'Все статусы', 'class' => 'form-control', 'id' => null],
                     'value' => function($data){
-                        return $data->getStatusLabel();
+                        return $data->getCommentStatusLabel();
                     }
                 ],
                 [
