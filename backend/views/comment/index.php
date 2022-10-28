@@ -22,15 +22,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 [
+                    'attribute' => 'article_id',
+                    'value' => function($data) {
+                        return $data->article->title;  
+                    }, 
+                ],
+                [
+                    'attribute' => 'user_id',
+                    'value' => function($data) {
+                        return $data->user->username;  
+                    },
+                ],
+                'text',
+                [
+                    'attribute' => 'date',
+                    'filter' => \yii\jui\DatePicker::widget([
+                        'model'=>$searchModel,
+                        'attribute'=>'date',
+                        'language' => 'ru',
+                        'dateFormat' => 'yyyy-MM-dd',
+                    ]),
+                    'format' => ['date']
+                ],
+                [
                     'attribute' => 'status',
+                    'filter' => ['0' => 'На рассмотрении', '1' => 'Разрешен', '2' => 'В архиве'],
+                    'filterInputOptions' => ['prompt' => 'Все статусы', 'class' => 'form-control', 'id' => null],
                     'value' => function($data){
                         return $data->getStatusLabel();
                     }
                 ],
-                'text',
-                'user_id',
-                'article_id',  
-                'date',
                 [
                     'attribute' => '',
                     'format' => 'raw',

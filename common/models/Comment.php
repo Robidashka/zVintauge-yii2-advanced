@@ -47,7 +47,7 @@ class Comment extends \yii\db\ActiveRecord
     }
 
     public static function getUserLabel() {
-        //return $this->hasOne(User::className(), ['id' => 'user_id']); ???
+        //return $this->hasOne(User::className(), ['id' => 'user_id']); 
     }
 
     public static function getArticleTitle() {
