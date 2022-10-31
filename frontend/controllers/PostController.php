@@ -59,27 +59,54 @@ class PostController extends Controller
     {
         $article = Article::find()->where(['slug'=>$slug])->one();
         $comments = $article->getArticleComments();
-        $commentForm = new CommentForm();
+        $model = new CommentForm();
         $article->viewedCount();
 
         return $this->render('single', [
             'article'=>$article,
             'comments'=>$comments,
-            'commentForm'=>$commentForm
+            'model'=>$model
         ]);
     }
 
     public function actionComment($id, $slug)
     {
-        $model = new CommentForm();
+        // $model = new CommentForm();
+        // $article = Article::find()->where(['slug'=>$slug])->one();
+        // $comments = $article->getArticleComments();
         
-        if(Yii::$app->request->isPost)
-        {
-            $model->load(Yii::$app->request->post());
-            if($model->saveComment($id))
-            {
-                Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
-                return $this->redirect(['post/post','slug'=>$slug]);
+        // if(Yii::$app->request->isPost)
+        // {
+        //     if( $model->load(Yii::$app->request->post()) && $model->saveComment($id))
+        //     {
+        //         $model = new CommentForm();
+        //         Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
+        //         return $this->redirect(['post/post','slug'=>$slug]);
+        //     }
+        // }
+
+        $model = new CommentForm();
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            if ($model->load(Yii::$app->request->post()) && $model->saveComment($id)) {
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            } else {
+                return [
+                    'data' => [
+                        'success' => false,
+                        'model' => null,
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
             }
         }
     }

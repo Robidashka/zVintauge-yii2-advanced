@@ -2,7 +2,6 @@
 
 <?php foreach($comments as $comment):?>
     <div class="bottom-comment"><!--bottom comment-->
-
         <div class="comment-text">
             <h5 class="comment-style"><?= $comment->getDate();?> by <?= $comment->user->username;?></h5>
             <p class="para"><?= $comment->text; ?></p>
@@ -12,7 +11,31 @@
 
 <?php endif;?>
 <!-- end bottom comment-->
-
+<?php
+    $this->registerJs(
+        '$(".contact-form").submit(function(event) {
+            event.preventDefault(); // stopping submitting
+            var data = $(this).serializeArray();
+            var url = $(this).attr(\'action\');
+            event.target.reset(); 
+            $.ajax({
+                url: url,
+                type: \'post\',
+                dataType: \'json\',
+                data: data
+            })
+            .done(function(response) {
+                if (response.data.success == true) {
+                   ?? 
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        
+        });'
+    );
+?>
 <?php if(!Yii::$app->user->isGuest):?>
     <div class="leave-comment"><!--leave comment-->
         <h4>Leave a reply</h4>
@@ -26,7 +49,7 @@
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
         <div class="form-group">
             <div class="col-md-12">
-                <?= $form->field($commentForm, 'comment')->textarea(['class'=>'form-control','placeholder'=>'Write Message'])->label(false)?>
+                <?= $form->field($model, 'comment')->textarea(['class'=>'form-control','placeholder'=>'Write Message'])->label(false)?>
             </div>
         </div>
         <center><button type="submit" class="com-btn">Post Comment</button></center>

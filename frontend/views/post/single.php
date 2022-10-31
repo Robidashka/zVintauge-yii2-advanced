@@ -59,7 +59,7 @@ $this->title = $title;?>
 									<?= $this->render('comment', [
                 						'article'=>$article,
                 						'comments'=>$comments,
-                						'commentForm'=>$commentForm
+                						'model'=>$model
             						])?>
 								</div>
 							</div>
