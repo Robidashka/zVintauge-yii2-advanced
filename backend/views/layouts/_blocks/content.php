@@ -14,7 +14,7 @@ use yii\widgets\Breadcrumbs;
 		[
 			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 			'homeLink' => [
-				'label' => 'Dashboard',
+				'label' => 'Панель упрвления',
 				'url' => Yii::$app->homeUrl,
 			],
 			'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',

@@ -12,6 +12,11 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <?php $form = ActiveForm::begin();?>
 
+    <p>
+        <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
+        <?= Html::a('Добавать категорию', ['set-category', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
+    </p>
+
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'description')->widget(CKEditor::className(),[
