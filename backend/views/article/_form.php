@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use common\models\Article;
 use mihaildev\ckeditor\CKEditor;
@@ -11,7 +10,7 @@ mihaildev\elfinder\Assets::noConflict($this);
 ?>
 <div class="article-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -23,7 +22,11 @@ mihaildev\elfinder\Assets::noConflict($this);
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
     ]);?>
 
-    <?= $form->field($model, 'status')->dropdownList(ArrayHelper::map(Article::find()->asArray()->all(), 'status', 'status'));?>
+    <?php echo $form->field($model, 'status')->dropdownList([
+        0 => 'Черновик',
+        1 => 'Опубликовано',
+        2 => 'В архив',
+    ]);?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
         'model' => $model, 

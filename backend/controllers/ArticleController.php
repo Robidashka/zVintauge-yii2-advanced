@@ -78,9 +78,11 @@ class ArticleController extends BackendController
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $article = $this->findModel($id);
+        if($article->archived())
+        {
+            return $this->redirect(['index']);
+        }
     }
 
     protected function findModel($id)

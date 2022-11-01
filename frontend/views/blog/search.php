@@ -4,10 +4,11 @@ use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-
-/** @var yii\web\View $this */
-
-$this->title = 'zVintauge | Search: '. $search;
+$searchTitle = null;
+if(!empty($search)){
+	$searchTitle = $search;
+};
+$this->title = 'zVintauge | Search: '.$searchTitle;
 ?>
 <div class="wrap-body">
 	<section id="container">

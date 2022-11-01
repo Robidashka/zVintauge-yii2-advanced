@@ -52,7 +52,8 @@ class Article extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['title','description','content'], 'string'],
             [['title'], 'string', 'max' => 255],
-            [['category_id'], 'number']
+            [['category_id'], 'number'],
+            [['status'], 'number']
         ];
     }
 
@@ -84,6 +85,12 @@ class Article extends \yii\db\ActiveRecord
 
     public function getArticleStatusLabel() {
         return self::getArticleStatusesLabel()[$this->status];
+    }
+
+    public function archived()
+    {
+        $this->status = self::ARTICLE_ARCHIVED;
+        return $this->save(false);
     }
 
     public function saveImage($filename)
@@ -160,7 +167,7 @@ class Article extends \yii\db\ActiveRecord
         ];
         return $this->getComments()->where(['status'=>$commentStatus])->all();
     }
-    
+
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id'=>'user_id']);

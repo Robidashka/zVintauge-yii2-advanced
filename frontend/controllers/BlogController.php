@@ -57,7 +57,7 @@ class BlogController extends Controller
 
     public function actionBlog()
     {
-        $query = Article::find();
+        $query = Article::find()->where(['status'=>1]);
 
         $count = $query->count();
 
@@ -75,7 +75,7 @@ class BlogController extends Controller
 
     public function actionCategory($id)
     {
-        $query = Article::find()->where(['category_id'=>$id]);
+        $query = Article::find()->where(['category_id'=>$id, 'status'=>1]);
 
         $count = $query->count();
 
@@ -96,7 +96,8 @@ class BlogController extends Controller
         $search = trim(Yii::$app->request->get('search'));
 
         $query = Article::find()->where(['like', 'title', $search]);
-        
+        $query = Article::find()->andWhere(['status'=>1]);
+
         $count = $query->count();
 
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
