@@ -71,20 +71,6 @@ class PostController extends Controller
 
     public function actionComment($id, $slug)
     {
-        // $model = new CommentForm();
-        // $article = Article::find()->where(['slug'=>$slug])->one();
-        // $comments = $article->getArticleComments();
-        
-        // if(Yii::$app->request->isPost)
-        // {
-        //     if( $model->load(Yii::$app->request->post()) && $model->saveComment($id))
-        //     {
-        //         $model = new CommentForm();
-        //         Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
-        //         return $this->redirect(['post/post','slug'=>$slug]);
-        //     }
-        // }
-
         $model = new CommentForm();
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

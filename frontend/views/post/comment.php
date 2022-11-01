@@ -1,23 +1,9 @@
-<?php if(!empty($comments)):?>
-
-<?php foreach($comments as $comment):?>
-    <div class="bottom-comment"><!--bottom comment-->
-        <div class="comment-text">
-            <h5 class="comment-style"><?= $comment->getDate();?> by <?= $comment->user->username;?></h5>
-            <p class="para"><?= $comment->text; ?></p>
-        </div>
-    </div>
-<?php endforeach;?>
-
-<?php endif;?>
-<!-- end bottom comment-->
 <?php
     $this->registerJs(
         '$(".contact-form").submit(function(event) {
             event.preventDefault(); // stopping submitting
             var data = $(this).serializeArray();
-            var url = $(this).attr(\'action\');
-            event.target.reset(); 
+            var url = $(this).attr(\'action\'); 
             $.ajax({
                 url: url,
                 type: \'post\',
@@ -26,16 +12,29 @@
             })
             .done(function(response) {
                 if (response.data.success == true) {
-                   ?? 
+                    event.target.reset();
+                    $( "#comments" ).load(window.location.href + " #comments" );
                 }
             })
             .fail(function() {
                 console.log("error");
             });
-        
         });'
     );
 ?>
+<div id="comments">
+    <?php if(!empty($comments)):?>
+        <?php foreach($comments as $comment):?>
+            <div class="bottom-comment"><!--bottom comment-->
+                <div class="comment-text">
+                    <h5 class="comment-style"><?= $comment->getDate();?> by <?= $comment->user->username;?></h5>
+                    <p class="para"><?= $comment->text; ?></p>
+                </div>
+            </div>
+        <?php endforeach;?>
+    <?php endif;?>
+</div>
+<!-- end bottom comment-->
 <?php if(!Yii::$app->user->isGuest):?>
     <div class="leave-comment"><!--leave comment-->
         <h4>Leave a reply</h4>

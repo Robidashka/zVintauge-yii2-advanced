@@ -154,7 +154,11 @@ class Article extends \yii\db\ActiveRecord
 
     public function getArticleComments()
     {
-        return $this->getComments()->where(['status'=>1])->all();
+        $commentStatus = [
+            self::ARTICLE_DRAFT, 
+            self::ARTICLE_POSTED,
+        ];
+        return $this->getComments()->where(['status'=>$commentStatus])->all();
     }
     
     public function getAuthor()
