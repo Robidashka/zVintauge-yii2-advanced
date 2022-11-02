@@ -43,6 +43,13 @@ class Article extends \yii\db\ActiveRecord
             'seo' => [
                 'class' => 'dvizh\seo\behaviors\SeoFields',
             ],
+
+            'files' => [
+                'class' => 'floor12\files\components\FileBehaviour',
+                'attributes' => [
+                    'main_image',
+                ],
+            ],
         ];
     }
 
@@ -53,7 +60,9 @@ class Article extends \yii\db\ActiveRecord
             [['title','description','content'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['category_id'], 'number'],
-            [['status'], 'number']
+            [['status'], 'number'],
+            [['main_image'], 'required'],
+            [['main_image'], 'file', 'extensions' => ['jpg', 'png', 'jpeg', 'gif'], 'maxFiles' => 1],
         ];
     }
 
@@ -68,6 +77,7 @@ class Article extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата изменения',
             'image' => 'Изображение',
+            'main_image' => 'AAA',
             'viewed' => 'Просмотры',
             'user_id' => 'Пользователь',
             'status' => 'Статус',

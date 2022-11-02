@@ -14,6 +14,8 @@ $Category = Category::find()->all();
 
     <?php $form = ActiveForm::begin();?>
 
+    <?= $form->field($model, 'main_image')->widget(floor12\files\components\FileInputWidget::class) ?>
+
     <p>
         <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
     </p>

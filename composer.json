@@ -21,7 +21,8 @@
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
         "andrewdanilov/yii2-admin-panel": "~2.0.0",
-        "dvizh/yii2-seo": "@dev"
+        "dvizh/yii2-seo": "@dev",
+        "floor12/yii2-module-files": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

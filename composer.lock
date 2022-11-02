@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1d3e1aca8acaf5882e235ce073652ef",
+    "content-hash": "cc326ad888754470967eadce1e20d2d9",
     "packages": [
         {
             "name": "andrewdanilov/yii2-admin-panel",
@@ -173,6 +173,21 @@
             ]
         },
         {
+            "name": "bower-asset/cropper",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fengyuanchen/cropper.git",
+                "reference": "617d9bdb8688cc4edb3b03bc49a04b83c7facbe7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fengyuanchen/cropper/zipball/617d9bdb8688cc4edb3b03bc49a04b83c7facbe7",
+                "reference": "617d9bdb8688cc4edb3b03bc49a04b83c7facbe7"
+            },
+            "type": "bower-asset"
+        },
+        {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
@@ -233,6 +248,27 @@
             ]
         },
         {
+            "name": "bower-asset/lightbox2",
+            "version": "v2.11.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lokesh/lightbox2.git",
+                "reference": "e51998c067f95a7d23599c2d1efa130f6662ec11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lokesh/lightbox2/zipball/e51998c067f95a7d23599c2d1efa130f6662ec11",
+                "reference": "e51998c067f95a7d23599c2d1efa130f6662ec11"
+            },
+            "require": {
+                "bower-asset/jquery": ">2"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -246,6 +282,24 @@
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/simple-ajax-uploader",
+            "version": "2.6.7",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:LPology/Simple-Ajax-Uploader.git",
+                "reference": "d827937d4b64252b620e194621586a4a453cf731"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LPology/Simple-Ajax-Uploader/zipball/d827937d4b64252b620e194621586a4a453cf731",
+                "reference": "d827937d4b64252b620e194621586a4a453cf731"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -586,6 +640,115 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.16.0"
             },
             "time": "2022-09-18T07:06:19+00:00"
+        },
+        {
+            "name": "floor12/yii2-module-files",
+            "version": "1.2.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/floor12/yii2-module-files.git",
+                "reference": "b9e7c90ded6c375ef8e1bbda2396ab23b52e1d81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/floor12/yii2-module-files/zipball/b9e7c90ded6c375ef8e1bbda2396ab23b52e1d81",
+                "reference": "b9e7c90ded6c375ef8e1bbda2396ab23b52e1d81",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/cropper": "*",
+                "bower-asset/lightbox2": "*",
+                "bower-asset/simple-ajax-uploader": ">=2.6.7",
+                "ext-exif": "*",
+                "ext-fileinfo": "*",
+                "ext-gd": "*",
+                "ext-zip": "*",
+                "floor12/yii2-notification": "*",
+                "php": ">=7.3",
+                "yii2mod/yii2-enum": "^1.7",
+                "yiisoft/yii2": "^2.0.",
+                "yiisoft/yii2-jui": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=7.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "floor12\\files\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "floor12",
+                    "email": "floor12@floor12.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 module to upload and manage files to your models.",
+            "keywords": [
+                "files",
+                "floor12",
+                "upload",
+                "yii",
+                "yii 2",
+                "yii2",
+                "yii2 module"
+            ],
+            "support": {
+                "issues": "https://github.com/floor12/yii2-module-files/issues",
+                "source": "https://github.com/floor12/yii2-module-files/tree/1.2.15"
+            },
+            "time": "2022-06-17T12:36:06+00:00"
+        },
+        {
+            "name": "floor12/yii2-notification",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/floor12/yii2-notification.git",
+                "reference": "86b012434c2495bf50b0faa8435b9ba7bb710bc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/floor12/yii2-notification/zipball/86b012434c2495bf50b0faa8435b9ba7bb710bc6",
+                "reference": "86b012434c2495bf50b0faa8435b9ba7bb710bc6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "floor12\\notification\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "floor12",
+                    "email": "primelifecoder@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple but useful JS notification script with PHP Api.",
+            "keywords": [
+                "notification",
+                "notify"
+            ],
+            "support": {
+                "issues": "https://github.com/floor12/yii2-notification/issues",
+                "source": "https://github.com/floor12/yii2-notification/tree/1.3.2"
+            },
+            "time": "2019-11-14T19:18:11+00:00"
         },
         {
             "name": "mihaildev/yii2-ckeditor",
@@ -1316,6 +1479,59 @@
                 }
             ],
             "time": "2022-05-24T11:49:31+00:00"
+        },
+        {
+            "name": "yii2mod/yii2-enum",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2mod/yii2-enum.git",
+                "reference": "7af030e19636ece5fd0adb5d6012d2b03fa63895"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2mod/yii2-enum/zipball/7af030e19636ece5fd0adb5d6012d2b03fa63895",
+                "reference": "7af030e19636ece5fd0adb5d6012d2b03fa63895",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2mod\\enum\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Semenov",
+                    "email": "disemx@gmail.com"
+                },
+                {
+                    "name": "Igor Chepurnoi",
+                    "email": "igorzfort@gmail.com"
+                }
+            ],
+            "description": "Yii2 Enumerable helpers",
+            "keywords": [
+                "enumerable helper",
+                "yii2",
+                "yii2 enum"
+            ],
+            "support": {
+                "issues": "https://github.com/yii2mod/yii2-enum/issues",
+                "source": "https://github.com/yii2mod/yii2-enum/tree/master"
+            },
+            "time": "2017-04-19T22:06:46+00:00"
         },
         {
             "name": "yiisoft/yii2",

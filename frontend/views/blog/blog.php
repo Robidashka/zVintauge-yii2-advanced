@@ -31,6 +31,7 @@ $this->title = 'zVintauge | Blog';
 									</div>
 									<div class="post-thumbnail-wrap">
 										<img src="<?= $article->getImage();?>">
+										<?php echo Html::img($article->main_image->href);?>
 									</div>
 									<div class="entry-content">
 										<p><?= $article->description;?></p>
