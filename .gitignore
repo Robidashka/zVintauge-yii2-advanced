@@ -44,5 +44,5 @@ phpunit.phar
 
 # image
 images/
-uploads/*
+uploads/
 global/
