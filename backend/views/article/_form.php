@@ -3,10 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Article;
+use common\models\Category;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 mihaildev\elfinder\Assets::noConflict($this);
 
+$Category = Category::find()->all();
 ?>
 <div class="article-form">
 
@@ -14,7 +16,6 @@ mihaildev\elfinder\Assets::noConflict($this);
 
     <p>
         <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
-        <?= Html::a('Добавать категорию', ['set-category', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
     </p>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -32,6 +33,10 @@ mihaildev\elfinder\Assets::noConflict($this);
         1 => 'Опубликовано',
         2 => 'В архив',
     ]);?>
+
+    <?php echo $form->field($model, 'category_id')->dropdownList(
+        \yii\helpers\ArrayHelper::map($Category, 'id', 'title')
+    );?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
         'model' => $model, 

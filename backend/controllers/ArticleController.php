@@ -105,32 +105,9 @@ class ArticleController extends BackendController
 
             if($article->saveImage($model->uploadFile($file, $article->image)))
             {
-                return $this->redirect(['view', 'id'=>$article->id]);
+                return $this->redirect(['update', 'id'=>$article->id]);
             }
         }
-        
         return $this->render('image', ['model'=>$model]);
-    }
-    
-    public function actionSetCategory($id)
-    {
-        $article = $this->findModel($id);
-        $selectedCategory = $article->category_id;
-        $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
-
-        if(Yii::$app->request->isPost)
-        {
-            $category = Yii::$app->request->post('category');
-            if($article->saveCategory($category))
-            {
-                return $this->redirect(['view', 'id'=>$article->id]);
-            }
-        }
-
-        return $this->render('category', [
-            'article'=>$article,
-            'selectedCategory'=>$selectedCategory,
-            'categories'=>$categories
-        ]);
     }
 }
