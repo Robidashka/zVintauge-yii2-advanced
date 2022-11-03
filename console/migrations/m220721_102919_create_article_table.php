@@ -20,7 +20,6 @@ class m220721_102919_create_article_table extends Migration
             'content'=>$this->text(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime()->notNull(),
-            'image'=>$this->string(),
             'viewed'=>$this->integer(),
             'user_id'=>$this->integer(),
             'status'=>$this->integer(),
