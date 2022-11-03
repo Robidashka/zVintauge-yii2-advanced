@@ -76,8 +76,7 @@ class Article extends \yii\db\ActiveRecord
             'content' => 'Содержание',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата изменения',
-            'image' => 'Изображение',
-            'main_image' => 'AAA',
+            'main_image' => 'Изображение',
             'viewed' => 'Просмотры',
             'user_id' => 'Пользователь',
             'status' => 'Статус',
@@ -101,29 +100,6 @@ class Article extends \yii\db\ActiveRecord
     {
         $this->status = self::ARTICLE_ARCHIVED;
         return $this->save(false);
-    }
-
-    public function saveImage($filename)
-    {
-        $this->image = $filename;
-        return $this->save(false);
-    }
-
-    public function getImage()
-    {
-        return ($this->image) ?  '/backend/web/uploads/' . $this->image : '/backend/web/uploads/no-image.png';
-    }
-
-    public function deleteImage()
-    {
-        $imageUploadModel = new ImageUpload();
-        $imageUploadModel->deleteCurrentImage($this->image);
-    }
-
-    public function beforeDelete()
-    {
-        $this->deleteImage();
-        return parent::beforeDelete();
     }
 
     public function getCategory()

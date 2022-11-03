@@ -26,15 +26,15 @@ $this->title = 'zVintauge | Blog';
 								<div class="row wrap-post">
 									<div class="entry-header">
 										<span class="time"><?= $article->getDate();?> by <?= $article->author->username;?></span>
-										<h2 class="entry-title"><a href="<?= Url::toRoute(['post/post', 'id'=>$article->id])?>"><?= $article->title;?></a></h2>
+										<h2 class="entry-title"><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
-											<?php if(!empty($article->category)){
-												Html::a('$article->category->title', ['blog/category', 'id' => $article->category->id]);
+											<?php if(!empty($article->category->title)){
+												echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
 											}?>
 										</span>
 									</div>
 									<div class="post-thumbnail-wrap">
-										<img src="<?= $article->getImage();?>">
+										<?php echo Html::img($article->main_image);?>
 									</div>
 									<div class="entry-content">
 										<p><?= $article->description;?></p>

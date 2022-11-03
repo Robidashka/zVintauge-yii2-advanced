@@ -57,7 +57,6 @@ class PostController extends Controller
 
     public function actionPost($slug)
     {
-        
         $article = Article::find()->where(['slug'=>$slug])->one();
         $comments = $article->getArticleComments();
         $model = new CommentForm();

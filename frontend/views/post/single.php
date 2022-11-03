@@ -40,13 +40,12 @@ $this->title = $title;?>
 								<h2 class="entry-title"><a><?= $article->title;?></a></h2>
 								<span class="cat-links">
 									<?php if(!empty($article->category)){
-										Html::a('$article->category->title', ['blog/category', 'id' => $article->category->id]);
+										echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
 									}?>
 								</span>
 							</div>
 							<div class="post-thumbnail-wrap">
-								<img src="<?= $article->getImage();?>">
-								<?php echo Html::img($article->main_image->href);?>
+								<?php echo Html::img($article->main_image);?>
 							</div>
 							<div class="entry-content">
 								<p><?= $article->content;?></p>

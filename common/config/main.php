@@ -10,4 +10,12 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
+    'modules' => [
+        'files' => [
+            'class' => 'floor12\files\Module',
+            'storage' => '@frontend/storage',
+            'cache' => '@frontend/storage_cache',
+            'token_salt' => 'jhfy6tjr7i6tit',
+        ],
+    ],
 ];

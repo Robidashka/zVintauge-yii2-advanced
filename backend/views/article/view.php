@@ -21,7 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:html',
             'content:html',
             'created_at',
-            'image',
+            [
+                'attribute' => 'main_image',
+                'format' => 'html',
+                'value' => function($model) {
+                    return Html::img($model->main_image);  
+                },
+            ],
             'viewed',
             [
                 'attribute' => 'user_id',
@@ -45,7 +51,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
         ],
-    ]) ?>
-<?php echo Html::img($model->main_image->href);?>
-<?php echo $model->main_image->href;?>
+    ])?>
 </div>

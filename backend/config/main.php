@@ -11,14 +11,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'files' => [
-            'class' => 'floor12\files\Module',
-            'storage' => '@app/storage',
-            'cache' => '@app/storage_cache',
-            'token_salt' => 'some_random_salt',
-        ],
-    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

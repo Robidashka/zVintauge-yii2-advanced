@@ -32,12 +32,17 @@ $this->title = 'Home';?>
 						<? $state = !$state;?>
 						<div class="row">
 							<article>
-								<div class="col-1-2 <? if($state) echo "f-right";?>">
-									<img src="<?= $article->getImage();?>">
+								<div class="col-1-2 t-center <? if($state) echo "f-right";?>">
+									<?php echo Html::img($article->main_image);?>
 								</div>
 								<div class="col-1-2">
 									<div class="entry-content t-center">
 										<h3><?= $article->title;?></h3>
+										<span class="cat-links">
+											<?php if(!empty($article->category)){
+												echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
+											}?>
+										</span>
 										<p><?= $article->description;?></p>
 										<a class="button" href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>">Read More</a>
 									</div>
