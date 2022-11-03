@@ -16,10 +16,6 @@ $Category = Category::find()->all();
 
     <?= $form->field($model, 'main_image')->widget(floor12\files\components\FileInputWidget::class) ?>
 
-    <p>
-        <?= Html::a('Добавить изображение', ['set-image', 'id' => $model->id], ['class' => 'btn btn-dark']) ?>
-    </p>
-
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'description')->widget(CKEditor::className(),[

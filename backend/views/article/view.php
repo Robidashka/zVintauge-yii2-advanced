@@ -38,10 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'category_id',
                 'value' => function($data) {
-                    return $data->category->title;  
+                    if(!empty($data->category->title)){
+                        return $data->category->title;
+                    }
+                    return '(not set)';  
                 },
             ],
         ],
     ]) ?>
-
+<?php echo Html::img($model->main_image->href);?>
+<?php echo $model->main_image->href;?>
 </div>
