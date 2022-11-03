@@ -16,7 +16,19 @@ $Category = Category::find()->all();
 
     <?= $form->field($model, 'main_image')->widget(floor12\files\components\FileInputWidget::class) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <div class="form-right">
+        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+        <?php echo $form->field($model, 'category_id')->dropdownList(
+            \yii\helpers\ArrayHelper::map($Category, 'id', 'title')
+        );?>
+
+        <?php echo $form->field($model, 'status')->dropdownList([
+                0 => 'Черновик',
+                1 => 'Опубликовано',
+                2 => 'В архив',
+        ]);?>
+    </div>
 
     <?php echo $form->field($model, 'description')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
@@ -25,16 +37,6 @@ $Category = Category::find()->all();
     <?php echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
     ]);?>
-
-    <?php echo $form->field($model, 'status')->dropdownList([
-        0 => 'Черновик',
-        1 => 'Опубликовано',
-        2 => 'В архив',
-    ]);?>
-
-    <?php echo $form->field($model, 'category_id')->dropdownList(
-        \yii\helpers\ArrayHelper::map($Category, 'id', 'title')
-    );?>
 
     <?=\dvizh\seo\widgets\SeoForm::widget([
         'model' => $model, 
