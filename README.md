@@ -14,4 +14,6 @@
 
 `php yii migrate --migrationPath=vendor/dvizh/yii2-seo/src/migrations`<br>
 
+`php yii migrate --migrationPath=@vendor/floor12/yii2-module-files/src/migrations/`<br>
+
 `php yii migrate`<br>
