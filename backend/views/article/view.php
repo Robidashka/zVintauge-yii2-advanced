@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'main_image',
                 'format' => 'html',
                 'value' => function($model) {
-                    return Html::img($model->main_image);  
+                    return Html::img($model->main_image, ['style' =>'height: 300px']);  
                 },
             ],
             'viewed',

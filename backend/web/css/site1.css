@@ -89,19 +89,3 @@ a.desc:after {
     outline: none;
 }
 
-.form-inline1 {
-    background-color: #a94442;
-}
-
-.field-article-title {
-    width: 45%;
-    display:inline-block;
-}
-.field-article-status {
-    width: 27%;
-    display:inline-block;
-}
-.field-article-category_id {
-    width: 27%;
-    display:inline-block;
-}

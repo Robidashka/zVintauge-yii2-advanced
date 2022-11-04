@@ -10,42 +10,43 @@ mihaildev\elfinder\Assets::noConflict($this);
 
 $Category = Category::find()->all();
 ?>
-<div class="article-form">
+<div class="">
 
     <?php $form = ActiveForm::begin();?>
 
-    <?= $form->field($model, 'main_image')->widget(floor12\files\components\FileInputWidget::class) ?>
+        <div class="row">
+            <div class="col">
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-right">
-        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?php echo $form->field($model, 'category_id')->dropdownList(
+                    \yii\helpers\ArrayHelper::map($Category, 'id', 'title')
+                );?>
 
-        <?php echo $form->field($model, 'category_id')->dropdownList(
-            \yii\helpers\ArrayHelper::map($Category, 'id', 'title')
-        );?>
-
-        <?php echo $form->field($model, 'status')->dropdownList([
-                0 => 'Черновик',
-                1 => 'Опубликовано',
-                2 => 'В архив',
+                <?php echo $form->field($model, 'status')->dropdownList([
+                        0 => 'Черновик',
+                        1 => 'Опубликовано',
+                        2 => 'В архив',
+                ]);?>
+            </div>
+            <div class="col">
+                <?= $form->field($model, 'main_image')->widget(floor12\files\components\FileInputWidget::class) ?>
+            </div>
+        </div>
+        
+        <?php echo $form->field($model, 'description')->widget(CKEditor::className(),[
+            'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
         ]);?>
-    </div>
 
-    <?php echo $form->field($model, 'description')->widget(CKEditor::className(),[
-        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
-    ]);?>
+        <?php echo $form->field($model, 'content')->widget(CKEditor::className(),[
+            'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
+        ]);?>
 
-    <?php echo $form->field($model, 'content')->widget(CKEditor::className(),[
-        'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
-    ]);?>
+        <?=\dvizh\seo\widgets\SeoForm::widget([
+            'model' => $model, 
+            'form' => $form, 
+        ]); ?>
 
-    <?=\dvizh\seo\widgets\SeoForm::widget([
-        'model' => $model, 
-        'form' => $form, 
-    ]); ?>
-
-    <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
-    </div>
 
     <?php ActiveForm::end(); ?>
 
