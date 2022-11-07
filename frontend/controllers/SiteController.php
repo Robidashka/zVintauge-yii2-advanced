@@ -7,15 +7,9 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use common\models\LoginForm;
-use common\models\ContactForm;
-use yii\data\Pagination;
 use common\models\Article;
-use common\models\Category;
 use yii\helpers\ArrayHelper;
-use frontend\models\CommentForm;
-use yii\data\ActiveDataProvider;
-
+use common\models\Seo;
 
 class SiteController extends Controller
 {
@@ -57,13 +51,16 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-
+        $id = Seo::find()->max('id');
+        $model = Seo::find()->where(['id'=>$id])->one();
         $articles = Article::find()->where(['status'=>1])->all();
-        return $this->render('index',['articles' => $articles]);
+        return $this->render('index',['articles' => $articles, 'model' => $model]);
     }
 
     public function actionAbout()
     {
-        return $this->render('about');
+        $id = Seo::find()->max('id');
+        $model = Seo::find()->where(['id'=>$id])->one();
+        return $this->render('about',['model' => $model]);
     }
 }

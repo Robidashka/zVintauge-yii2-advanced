@@ -1,8 +1,26 @@
 <?php
 
-/** @var yii\web\View $this */
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\db\ActiveQuery;
+
+if(!$description = $model->description_home) {
+	$description = "{$model->description_home}";
+}
+
+if(!$keywords = $model->keywords_home) {
+	$keywords = '';
+}
+
+$this->registerMetaTag([
+	'name' => 'description',
+	'content' => $description,
+]);
+
+$this->registerMetaTag([
+	'name' => 'keywords',
+	'content' => $keywords,
+]);
 
 $this->title = 'Home';?>
 <section id="container">
@@ -35,9 +53,9 @@ $this->title = 'Home';?>
 								<div class="col-1-2 t-center <? if($state) echo "f-right";?>">
 									<?php echo Html::img($article->main_image);?>
 								</div>
-								<div class="col-1-2">
+								<div class="col-1-2 ">
 									<div class="entry-content t-center">
-										<h3><?= $article->title;?></h3>
+										<h3><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h3>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
 												echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);

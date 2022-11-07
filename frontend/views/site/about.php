@@ -5,6 +5,24 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+if(!$description = $model->description_about) {
+	$description = "{$model->description_about}";
+}
+
+if(!$keywords = $model->keywords_about) {
+	$keywords = '';
+}
+
+$this->registerMetaTag([
+	'name' => 'description',
+	'content' => $description,
+]);
+
+$this->registerMetaTag([
+	'name' => 'keywords',
+	'content' => $keywords,
+]);
+
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;?>
 <section id="container">

@@ -1,0 +1,38 @@
+<?php
+
+namespace backend\controllers;
+
+use andrewdanilov\adminpanel\controllers\BackendController;
+use yii\filters\VerbFilter;
+use Yii;
+use common\models\Seo;
+
+class SeoController extends BackendController
+{
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    public function actionIndex()
+    {
+        $model = new Seo();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->render('index', [
+                'model' => $model,
+            ]);
+        } 
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+    }
+}

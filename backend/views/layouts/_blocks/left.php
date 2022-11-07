@@ -12,6 +12,7 @@ use andrewdanilov\adminpanel\widgets\Menu;
 	<div class="sidebar-heading"><?= $siteName ?></div>
 	<?= Menu::widget(['items' => [
 		['label' => 'Панель управления', 'url' => ['/site/index']],
+		['label' => 'SEO главных страниц', 'url' => ['/seo/index']],
 		['label' => 'Статьи', 'url' => ['/article/index']],
 		['label' => 'Категории', 'url' => ['/category/index']],
 		['label' => 'Комментарии', 'url' => ['/comment/index']],
