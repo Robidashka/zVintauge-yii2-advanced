@@ -63,10 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'viewed',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => \andrewdanilov\gridtools\FontawesomeActionColumn::class,
+                'template' => '{update}{delete}',
             ],
         ],
     ]); ?>

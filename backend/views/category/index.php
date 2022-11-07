@@ -26,11 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+                'class' => \andrewdanilov\gridtools\FontawesomeActionColumn::class,
+                'template' => '{update}{delete}',
+            ]
         ],
     ]); ?>
 
