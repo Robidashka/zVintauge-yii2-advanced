@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use common\models\Article;
 use yii\helpers\ArrayHelper;
 use common\models\Seo;
+use common\models\About;
 
 class SiteController extends Controller
 {
@@ -61,6 +62,8 @@ class SiteController extends Controller
     {
         $id = Seo::find()->max('id');
         $model = Seo::find()->where(['id'=>$id])->one();
-        return $this->render('about',['model' => $model]);
+        $id = About::find()->max('id');
+        $about = About::find()->where(['id'=>$id])->one();
+        return $this->render('about',['model' => $model, 'about' => $about]);
     }
 }
