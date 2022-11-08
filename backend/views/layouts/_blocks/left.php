@@ -18,5 +18,6 @@ use andrewdanilov\adminpanel\widgets\Menu;
 		['label' => 'Категории', 'url' => ['/category/index']],
 		['label' => 'Комментарии', 'url' => ['/comment/index']],
 		['label' => 'Пользователи', 'url' => ['/user/index']],
+		['label' => 'Блоки', 'url' => ['/blocks/index']],
 	]]) ?>
 </div>

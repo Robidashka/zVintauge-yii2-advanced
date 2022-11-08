@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use andrewdanilov\adminpanel\controllers\BackendController;
-use common\models\Category;
 use Yii;
-use common\models\Article;
-use common\models\search\ArticleSearch;
+use common\models\Blocks;
+use common\models\search\BlocksSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
-class ArticleController extends BackendController
+class BlocksController extends BackendController
 {
     public function behaviors()
     {
@@ -29,7 +28,7 @@ class ArticleController extends BackendController
 
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
+        $searchModel = new BlocksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -40,10 +39,9 @@ class ArticleController extends BackendController
 
     public function actionCreate()
     {
-        $model = new Article();
+        $model = new Blocks();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user->id;
             $model->save();
             return $this->redirect(['index']);
         } else {
@@ -58,7 +56,6 @@ class ArticleController extends BackendController
         $model = $this->findModel($id);
         
         if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user->id;
             $model->save();
             return $this->redirect(['index']);
         } else {
@@ -70,8 +67,8 @@ class ArticleController extends BackendController
 
     public function actionDelete($id)
     {
-        $article = $this->findModel($id);
-        if($article->archived())
+        $model = $this->findModel($id);
+        if($model->delete())
         {
             return $this->redirect(['index']);
         }
@@ -79,7 +76,7 @@ class ArticleController extends BackendController
 
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = Blocks::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

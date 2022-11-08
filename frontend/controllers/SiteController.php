@@ -11,6 +11,7 @@ use common\models\Article;
 use yii\helpers\ArrayHelper;
 use common\models\Seo;
 use common\models\About;
+use common\models\Blocks;
 
 class SiteController extends Controller
 {
@@ -55,7 +56,12 @@ class SiteController extends Controller
         $id = Seo::find()->max('id');
         $model = Seo::find()->where(['id'=>$id])->one();
         $articles = Article::find()->where(['status'=>1])->all();
-        return $this->render('index',['articles' => $articles, 'model' => $model]);
+        $blocks = Blocks::find()->all();
+        return $this->render('index',[
+            'articles' => $articles, 
+            'model' => $model, 
+            'blocks' => $blocks,
+        ]);
     }
 
     public function actionAbout()
