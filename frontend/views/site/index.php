@@ -34,10 +34,10 @@ $this->title = 'Home';?>
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
 					<div class="box-header">
-						<h2><?php echo $blocks['first']->title;?></h2>
+						<h2><?php echo $block['home']['title'];?></h2>
 					</div>
 					<div class="box-content">
-						<?php echo $blocks->content;?>
+						<?php echo $block['home']['content'];?>
 					</div>
 				</div>
 			</div>

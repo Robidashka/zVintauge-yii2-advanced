@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-create">
 
-    <h1>Саздание статьи</h1>
+    <h1>Создание статьи</h1>
 
     <?= $this->render('_form', [
         'model' => $model,

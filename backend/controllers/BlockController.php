@@ -4,15 +4,15 @@ namespace backend\controllers;
 
 use andrewdanilov\adminpanel\controllers\BackendController;
 use Yii;
-use common\models\Blocks;
-use common\models\search\BlocksSearch;
+use common\models\Block;
+use common\models\search\BlockSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
-class BlocksController extends BackendController
+class BlockController extends BackendController
 {
     public function behaviors()
     {
@@ -28,7 +28,7 @@ class BlocksController extends BackendController
 
     public function actionIndex()
     {
-        $searchModel = new BlocksSearch();
+        $searchModel = new BlockSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -39,7 +39,7 @@ class BlocksController extends BackendController
 
     public function actionCreate()
     {
-        $model = new Blocks();
+        $model = new Block();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->save();

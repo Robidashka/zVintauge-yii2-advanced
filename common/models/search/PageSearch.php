@@ -4,26 +4,45 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Blocks;
+use common\models\Page;
 
-class BlocksSearch extends Blocks
+/**
+ * PageSearch represents the model behind the search form of `common\models\Page`.
+ */
+class PageSearch extends Page
 {
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['index', 'title', 'content'], 'safe'],
+            [['page_name', 'key'], 'safe'],
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function scenarios()
     {
+        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
     public function search($params)
     {
-        $query = Blocks::find();
+        $query = Page::find();
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -37,13 +56,13 @@ class BlocksSearch extends Blocks
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'index', $this->index])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'page_name', $this->page_name])
+            ->andFilterWhere(['like', 'key', $this->key]);
 
         return $dataProvider;
     }
