@@ -17,7 +17,7 @@ $this->title = 'zVintauge | Category';
 					<div class="row">
 						<article class="single-post zerogrid">
 							<div class="search11">
-								<form action="<?= Url::to(['blog/search']); ?>" method="get" class="search1">
+								<form action="<?= Url::to(['article/search']); ?>" method="get" class="search1">
 									<input type="text" class="search" name="search" placeholder="Search">
                                     <input type="submit" name="submit" class="submit" value="Search">
 								</form>
@@ -29,7 +29,7 @@ $this->title = 'zVintauge | Category';
 										<h2 class="entry-title"><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
-												echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
+												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
 											}?>
 										</span>
 									</div>

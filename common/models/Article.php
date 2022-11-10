@@ -115,11 +115,8 @@ class Article extends \yii\db\ActiveRecord
     public static function getAll($pageSize = 5)
     {
         $query = Article::find();
-
         $count = $query->count();
-
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>$pageSize]);
-
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -153,5 +150,10 @@ class Article extends \yii\db\ActiveRecord
     {
         $this->viewed += 1;
         return $this->save(false);
+    }
+
+    public static function getArticlesPosted($filters = [])
+    {
+        return Article::find()->where(['status'=>1])->andWhere($filters)->orderBy('updated_at desc');
     }
 }

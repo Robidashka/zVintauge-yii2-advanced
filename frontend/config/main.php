@@ -44,10 +44,8 @@ return [
             'rules' => [
                 '<action:(login|logout|signup)>' => 'auth/<action>',
                 '<action:(about)>' => 'site/<action>',
-                '<action:(blog|category|search)>' => 'blog/<action>',
                 '<action:(post)>' => 'post/<action>',
                 '<action:(/)>' => 'site/<action>',
-                // 'status/view/<id:\d+>' => 'status/view',  
 
             ],
         ],

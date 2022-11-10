@@ -40,7 +40,7 @@ $this->title = $title;?>
 								<h2 class="entry-title"><a><?= $article->title;?></a></h2>
 								<span class="cat-links">
 									<?php if(!empty($article->category)){
-										echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
+										echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
 									}?>
 								</span>
 							</div>

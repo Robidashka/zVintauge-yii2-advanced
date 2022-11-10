@@ -17,7 +17,7 @@ use frontend\models\CommentForm;
 use yii\data\ActiveDataProvider;
 
 
-class BlogController extends Controller
+class ArticleController extends Controller
 {
     public function behaviors()
     {
@@ -55,24 +55,28 @@ class BlogController extends Controller
         ];
     }
 
-    public function actionBlog()
+    public function actionIndex()
     {
-        $query = Article::find()->where(['status'=>1]);!!!!
+        $query = Article::getArticlesPosted();
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
 
-        return $this->render('blog', [
+        return $this->render('index', [
             'articles' => $articles,
             'pagination' => $pagination,
         ]);
     }
 
+    public function actionView($slug) {
+        
+    }
+
     public function actionCategory($id)
     {
-        $query = Article::find()->where(['category_id'=>$id, 'status'=>1]);
+        $query = Article::find()->where(['category_id'=>$id, 'status'=>1])->orderBy('updated_at desc');
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
         $articles = $query->offset($pagination->offset)
@@ -85,11 +89,10 @@ class BlogController extends Controller
         ]);
     }
 
-    public function actionSearch()
+    public function actionSearch($search, $submit)
     {
         $search = trim(Yii::$app->request->get('search'));
-        $query = Article::find()->where(['like', 'title', $search]);
-        $query = Article::find()->andWhere(['status'=>1]);
+        $query = Article::find()->where(['like', 'title', $search])->andWhere(['status'=>1])->orderBy('updated_at desc');
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
         $articles = $query->offset($pagination->offset)

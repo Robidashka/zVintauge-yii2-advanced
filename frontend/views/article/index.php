@@ -4,11 +4,10 @@ use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-$searchTitle = null;
-if(!empty($search)){
-	$searchTitle = $search;
-};
-$this->title = 'zVintauge | Search: '.$searchTitle;
+
+/** @var yii\web\View $this */
+
+$this->title = 'zVintauge | Blog';
 ?>
 <div class="wrap-body">
 	<section id="container">
@@ -18,7 +17,7 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 					<div class="row">
 						<article class="single-post zerogrid">
 							<div class="search11">
-								<form action="<?= Url::to(['blog/search']); ?>" method="get" class="search1">
+								<form action="<?= Url::to(['article/search']); ?>" method="get" class="search1">
 									<input type="text" class="search" name="search" placeholder="Search">
                                     <input type="submit" name="submit" class="submit" value="Search">
 								</form>
@@ -29,8 +28,8 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 										<span class="time"><?= $article->getDate();?> by <?= $article->author->username;?></span>
 										<h2 class="entry-title"><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
-											<?php if(!empty($article->category)){
-												echo Html::a($article->category->title, ['blog/category', 'id' => $article->category->id]);
+											<?php if(!empty($article->category->title)){
+												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
 											}?>
 										</span>
 									</div>
@@ -55,11 +54,11 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 	</section>
 </div>
 <div class="center">
-<?php   
-    if(!empty($articles)):
-	    echo LinkPager::widget([
-	    	'pagination' => $pagination,
-	    ]);
-    endif;
-?>
+	<?php   
+	    if(!empty($articles)):
+		    echo LinkPager::widget([
+		    	'pagination' => $pagination,
+		    ]);
+	    endif;
+	?>
 </div>
