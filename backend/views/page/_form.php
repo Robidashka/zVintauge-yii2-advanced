@@ -12,9 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'slider')->widget(floor12\files\components\FileInputWidget::class) ?>
+
     <?= $form->field($model, 'page_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+
+    <?=\dvizh\seo\widgets\SeoForm::widget([
+        'model' => $model, 
+        'form' => $form, 
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

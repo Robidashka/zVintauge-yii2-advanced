@@ -76,7 +76,7 @@ class BlockController extends BackendController
 
     protected function findModel($id)
     {
-        if (($model = Blocks::findOne($id)) !== null) {
+        if (($model = Block::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

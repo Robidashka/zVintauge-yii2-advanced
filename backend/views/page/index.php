@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\search\PageSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Pages';
+$this->title = 'Страницы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
@@ -18,10 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Page', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать страницу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,14 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'page_name',
             'key',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Page $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => \andrewdanilov\gridtools\FontawesomeActionColumn::class,
+                'template' => '{update}{delete}',
             ],
         ],
     ]); ?>

@@ -30,7 +30,7 @@ class Block extends \yii\db\ActiveRecord
         return [
             [['page_id'], 'number'],
             [['index', 'title'], 'string', 'max' => 255],
-            [['content'], 'string', 'max' => 1024],
+            [['content'], 'string', 'max' => 2048],
         ];
     }
 

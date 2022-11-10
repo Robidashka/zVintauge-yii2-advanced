@@ -4,11 +4,15 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\db\ActiveQuery;
 
-if(!$description = $model->description_home) {
-	$description = "{$model->description_home}";
+if(!$title = $page->seo->title) {
+	$title = "{$seo->title}";
 }
 
-if(!$keywords = $model->keywords_home) {
+if(!$description = $page->seo->description) {
+	$description = "{$seo->description}";
+}
+
+if(!$keywords = $page->seo->keywords) {
 	$keywords = '';
 }
 
@@ -22,23 +26,26 @@ $this->registerMetaTag([
 	'content' => $keywords,
 ]);
 
-
-$this->title = 'Home';?>
+$this->title = $title;?>
 <section id="container">
 	<div class="wrap-container">
 		<!-----------------content-box-1-------------------->
 		<section class="content-box box-1">
             <div class="item">
-		        <img src="images/slide1.jpg" />
+				<?php if(!empty($page->slider)){
+					echo Html::img($page->slider, ['style' => 'width: 1000px']);
+				}?>
 	        </div>
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<div class="box-header">
-						<h2><?php echo $block['home']['title'];?></h2>
-					</div>
-					<div class="box-content">
-						<?php echo $block['home']['content'];?>
-					</div>
+					<?php if(!empty($block['home0'])):?>
+						<div class="box-header">
+							<h2><?php echo $block['home0']['title'];?></h2>
+						</div>
+						<div class="box-content">
+							<?php echo $block['home0']['content'];?>
+						</div>
+					<?php endif;?>
 				</div>
 			</div>
 		</section>
@@ -76,26 +83,28 @@ $this->title = 'Home';?>
 		<section class="content-box box-3">
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<div class="box-header">
-						<h2>OUR PHILOSOPHY</h2>
-					</div>
-					<div class="box-content">
-						<div class="row">
-							<div class="col-1-2">
-								<div class="wrap-col">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril.</p>
-								</div>
-							</div>
-							<div class="col-1-2">
-								<div class="wrap-col">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril.</p>
-								</div>
-							</div>
+					<?php if(!empty($block['home1'])):?>
+						<div class="box-header">
+							<h2><?php echo $block['home1']['title'];?></h2>
 						</div>
-						<div class="row">
-							<blockquote><p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet vultatup duista.</p></blockquote>
+						<div class="box-content">
+							<?php echo $block['home1']['content'];?>
 						</div>
-					</div>
+					<?php endif;?>
+				</div>
+			</div>
+		</section>
+		<section class="content-box box-3">
+			<div class="zerogrid">
+				<div class="wrap-box"><!--Start Box-->
+					<?php if(!empty($block['home2'])):?>
+						<div class="box-header">
+							<h2><?php echo $block['home2']['title'];?></h2>
+						</div>
+						<div class="box-content">
+							<blockquote><?php echo $block['home2']['content'];?></blockquote>
+						</div>
+					<?php endif;?>
 				</div>
 			</div>
 		</section>

@@ -9,8 +9,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use common\models\Article;
 use yii\helpers\ArrayHelper;
-use common\models\Seo;
-use common\models\About;
 use common\models\Block;
 use common\models\Page;
 
@@ -54,18 +52,12 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $id = Seo::find()->max('id');
-        $model = Seo::find()->where(['id'=>$id])->one();
         $articles = Article::find()->where(['status'=>1])->all();
-        // $block = Block::find()->where(['page_id'=>self::PAGE_HOME])->all();
-        //$block = Block::getIndexedBlockArray();
-
         $page = Page::find()->where(['key' => 'home'])->one();
         $block = $page->getIndexedBlockArray();
 
         return $this->render('index',[
             'articles' => $articles, 
-            'model' => $model, 
             'page' => $page,
             'block' => $block,
         ]);
@@ -73,10 +65,12 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
-        $id = Seo::find()->max('id');
-        $model = Seo::find()->where(['id'=>$id])->one();
-        $id = About::find()->max('id');
-        $about = About::find()->where(['id'=>$id])->one();
-        return $this->render('about',['model' => $model, 'about' => $about]);
+        $page = Page::find()->where(['key' => 'about'])->one();
+        $block = $page->getIndexedBlockArray();
+        
+        return $this->render('about',[
+            'page' => $page,
+            'block' => $block,
+        ]);
     }
 }

@@ -17,7 +17,7 @@ class m221108_120152_create_blocks_table extends Migration
             'page_id' => $this->integer(),
             'index' => $this->string(),
             'title' => $this->string(),
-            'content' => $this->string(1024),
+            'content' => $this->string(2048),
         ]);
 
         $this->createIndex(

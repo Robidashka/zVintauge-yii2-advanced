@@ -4,7 +4,6 @@ use yii\helpers\Html;
 
 $this->title = 'Изменение блока: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Блоки', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="article-update">

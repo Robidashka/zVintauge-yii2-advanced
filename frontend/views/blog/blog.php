@@ -54,11 +54,11 @@ $this->title = 'zVintauge | Blog';
 	</section>
 </div>
 <div class="center">
-<?php   
-    if(!empty($articles)):
-	    echo LinkPager::widget([
-	    	'pagination' => $pagination,
-	    ]);
-    endif;
-?>
+	<?php   
+	    if(!empty($articles)):
+		    echo LinkPager::widget([
+		    	'pagination' => $pagination,
+		    ]);
+	    endif;
+	?>
 </div>

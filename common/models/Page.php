@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use dvizh\seo\models\Seo;
 
 /**
  * This is the model class for table "page".
@@ -23,6 +24,22 @@ class Page extends \yii\db\ActiveRecord
         return 'page';
     }
 
+    public function behaviors()
+    {
+        return [
+            'seo' => [
+                'class' => 'dvizh\seo\behaviors\SeoFields',
+            ],
+
+            'files' => [
+                'class' => 'floor12\files\components\FileBehaviour',
+                'attributes' => [
+                    'slider',
+                ],
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +47,8 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             [['page_name', 'key'], 'string', 'max' => 255],
+            [['slider'], 'required'],
+            [['slider'], 'file', 'extensions' => ['jpg', 'png', 'jpeg', 'gif'], 'maxFiles' => 5],
         ];
     }
 
@@ -42,6 +61,7 @@ class Page extends \yii\db\ActiveRecord
             'id' => 'ID',
             'page_name' => 'Название страницы',
             'key' => 'Ключ',
+            'slider' => 'Слайдер',
         ];
     }
 
