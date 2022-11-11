@@ -71,28 +71,21 @@ class ArticleController extends Controller
     }
 
     public function actionView($slug) {
-        
-    }
+        $article = Article::find()->where(['slug'=>$slug])->one();
+        $comments = $article->getArticleComments();
+        $model = new CommentForm();
+        $article->viewedCount();
 
-    public function actionCategory($id)
-    {
-        $query = Article::find()->where(['category_id'=>$id, 'status'=>1])->orderBy('updated_at desc');
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
-        $articles = $query->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-        return $this->render('category', [
-            'articles' => $articles,
-            'pagination' => $pagination,
+        return $this->render('view', [
+            'article'=>$article,
+            'comments'=>$comments,
+            'model'=>$model
         ]);
     }
 
     public function actionSearch($search, $submit)
     {
-        $search = trim(Yii::$app->request->get('search'));
-        $query = Article::find()->where(['like', 'title', $search])->andWhere(['status'=>1])->orderBy('updated_at desc');
+        $query = Article::getArticlesPosted(['like', 'title', $search]);
         $count = $query->count();
         $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
         $articles = $query->offset($pagination->offset)
@@ -109,6 +102,34 @@ class ArticleController extends Controller
             'pagination' => $pagination,
             'search' => $search,
         ]);
+    }
+
+    public function actionComment($id, $slug)
+    {
+        $model = new CommentForm();
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            if ($model->load(Yii::$app->request->post()) && $model->saveComment($id)) {
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model' => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            } else {
+                return [
+                    'data' => [
+                        'success' => false,
+                        'model' => null,
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1, // Some semantic codes that you know them for yourself
+                ];
+            }
+        }
     }
     
 }

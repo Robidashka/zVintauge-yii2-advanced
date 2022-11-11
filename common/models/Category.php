@@ -4,12 +4,24 @@ namespace common\models;
 
 use Yii;
 use yii\data\Pagination;
+use yii\behaviors\SluggableBehavior;
 
 class Category extends \yii\db\ActiveRecord
 {
     public static function tableName()
     {
         return 'category';
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::class,
+                'attribute' => 'title',
+                'ensureUnique' => true,
+            ],
+        ];
     }
 
     public function rules()
@@ -23,6 +35,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'slug' => 'Slug',
             'title' => 'Название',
         ];
     }

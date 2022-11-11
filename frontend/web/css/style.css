@@ -1140,3 +1140,37 @@ li.disabled {
     margin-top: 15%;
     margin-bottom: 15%;
 }
+
+.dropdown .dropbtn {
+    outline: none;
+    color: white;
+    background-color: #161616;
+    padding: 13px 20px;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #161616;
+    min-width: 160px;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    color: #000;
+    background-color: #353535;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

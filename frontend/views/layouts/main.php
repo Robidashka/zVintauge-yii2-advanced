@@ -11,7 +11,9 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
+use common\models\Category;
 
+$category = Category::getAll();
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -40,6 +42,16 @@ AppAsset::register($this);
 				<ul>
 					<li><a href="<?= Url::toRoute(['/'])?>"><span>Home</span></a></li>
 					<li><a href="<?= Url::toRoute(['/article'])?>"><span>Blog</span></a></li>
+					<li>
+						<div class="dropdown">
+    						<button class="dropbtn logout-btn"><span>CATEGORY</span></button>
+    						<div class="dropdown-content">
+								<?php if(!empty($category)): foreach($category as $category):?> 
+									<?php echo Html::a($category->title, ['category/', 'id'=>$category->id]);?>
+								<?php endforeach; endif;?>
+    						</div>
+  						</div> 
+					</li>
 					<li><a href="<?= Url::toRoute(['/about'])?>"><span>About</span></a></li>
 					<?php if(Yii::$app->user->isGuest):?>
 	    	            <li><a href="<?= Url::toRoute(['/login'])?>">Login</a></li>

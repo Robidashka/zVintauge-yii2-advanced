@@ -27,7 +27,7 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 								<div class="row wrap-post">
 									<div class="entry-header">
 										<span class="time"><?= $article->getDate();?> by <?= $article->author->username;?></span>
-										<h2 class="entry-title"><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
+										<h2 class="entry-title"><a href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
 												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
@@ -39,7 +39,7 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 									</div>
 									<div class="entry-content">
 										<p><?= $article->description;?></p>
-										<center><a class="button " href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>">Read More</a></center>
+										<center><a class="button " href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>">Read More</a></center>
 									</div>
 									<div class="viewed"> 
 										<p class="viewed-1 border-view">&#128065</p> 

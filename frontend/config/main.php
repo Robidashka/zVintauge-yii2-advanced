@@ -44,7 +44,6 @@ return [
             'rules' => [
                 '<action:(login|logout|signup)>' => 'auth/<action>',
                 '<action:(about)>' => 'site/<action>',
-                '<action:(post)>' => 'post/<action>',
                 '<action:(/)>' => 'site/<action>',
 
             ],

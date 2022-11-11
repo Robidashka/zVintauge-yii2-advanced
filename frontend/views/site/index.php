@@ -63,14 +63,14 @@ $this->title = $title;?>
 								</div>
 								<div class="col-1-2 ">
 									<div class="entry-content t-center">
-										<h3><a href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h3>
+										<h3><a href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h3>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
 												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
 											}?>
 										</span>
 										<p><?= $article->description;?></p>
-										<a class="button" href="<?= Url::toRoute(['post/post', 'slug'=>$article->slug])?>">Read More</a>
+										<a class="button" href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>">Read More</a>
 									</div>
 								</div>
 							</article>
