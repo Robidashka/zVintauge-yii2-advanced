@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;?>
 	        </div>
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<?php if(!empty($block['about0'])):?>
+					<?php if(!empty($block['block0'])):?>
 						<div class="box-header">
-							<h2><?php echo $block['about0']['title'];?></h2>
+							<h2><?php echo $block['block0']['title'];?></h2>
 						</div>
 						<div class="box-content">
-							<?php echo $block['about0']['content'];?>
+							<?php echo $block['block0']['content'];?>
 						</div>
 					<?php endif;?>
 				</div>
@@ -54,12 +54,26 @@ $this->params['breadcrumbs'][] = $this->title;?>
 		<article class="single-post zerogrid">
 			<div class="row wrap-post"><!--Start Box-->
 				<div class="entry-content">
-					<?php if(!empty($block['about1'])):?>
+					<?php if(!empty($block['block1'])):?>
 						<div class="box-header">
-							<h2><?php echo $block['about1']['title'];?></h2>
+							<h2><?php echo $block['block1']['title'];?></h2>
 						</div>
 						<div class="box-content">
-							<?php echo $block['about1']['content'];?>
+							<?php echo $block['block1']['content'];?>
+						</div>
+					<?php endif;?>
+				</div>
+			</div>
+		</article>
+		<article class="single-post zerogrid">
+			<div class="row wrap-post"><!--Start Box-->
+				<div class="entry-content">
+					<?php if(!empty($block['block2'])):?>
+						<div class="box-header">
+							<h2><?php echo $block['block2']['title'];?></h2>
+						</div>
+						<div class="box-content">
+							<?php echo $block['block2']['content'];?>
 						</div>
 					<?php endif;?>
 				</div>

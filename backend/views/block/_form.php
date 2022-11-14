@@ -18,7 +18,11 @@ $page = Page::find()->all();
             \yii\helpers\ArrayHelper::map($page, 'id', 'page_name')
         );?>
 
-        <?= $form->field($model, 'index')->textInput(['maxlength' => true]) ?>
+        <?php echo $form->field($model, 'index')->dropdownList([
+                'block0' => 'Первый блок',
+                'block1' => 'Второй блок',
+                'block2' => 'Третий блок',
+        ]);?>
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

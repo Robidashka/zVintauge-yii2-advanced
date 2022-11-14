@@ -56,8 +56,6 @@ class Category extends \yii\db\ActiveRecord
         return Category::find()->all();
     }
 
-
-    
     public function getArticlesByCategory()
     {
         $query = Article::find()->where(['category_id'=>$this->id])->andWhere(['status'=>1])->orderBy('updated_at desc');

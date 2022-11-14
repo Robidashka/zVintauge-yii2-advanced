@@ -38,12 +38,12 @@ $this->title = $title;?>
 	        </div>
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<?php if(!empty($block['home0'])):?>
+					<?php if(!empty($block['block0'])):?>
 						<div class="box-header">
-							<h2><?php echo $block['home0']['title'];?></h2>
+							<h2><?php echo $block['block0']['title'];?></h2>
 						</div>
 						<div class="box-content">
-							<?php echo $block['home0']['content'];?>
+							<?php echo $block['block0']['content'];?>
 						</div>
 					<?php endif;?>
 				</div>
@@ -83,12 +83,12 @@ $this->title = $title;?>
 		<section class="content-box box-3">
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<?php if(!empty($block['home1'])):?>
+					<?php if(!empty($block['block1'])):?>
 						<div class="box-header">
-							<h2><?php echo $block['home1']['title'];?></h2>
+							<h2><?php echo $block['block1']['title'];?></h2>
 						</div>
 						<div class="box-content">
-							<?php echo $block['home1']['content'];?>
+							<?php echo $block['block1']['content'];?>
 						</div>
 					<?php endif;?>
 				</div>
@@ -97,12 +97,12 @@ $this->title = $title;?>
 		<section class="content-box box-3">
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
-					<?php if(!empty($block['home2'])):?>
+					<?php if(!empty($block['block2'])):?>
 						<div class="box-header">
-							<h2><?php echo $block['home2']['title'];?></h2>
+							<h2><?php echo $block['block2']['title'];?></h2>
 						</div>
 						<div class="box-content">
-							<blockquote><?php echo $block['home2']['content'];?></blockquote>
+							<blockquote><?php echo $block['block2']['content'];?></blockquote>
 						</div>
 					<?php endif;?>
 				</div>
