@@ -30,7 +30,7 @@ $this->title = 'zVintauge | Search: '.$searchTitle;
 										<h2 class="entry-title"><a href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
-												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
+												echo Html::a($article->category->title, ['article/category', 'slug'=>$article->category->slug]);
 											}?>
 										</span>
 									</div>

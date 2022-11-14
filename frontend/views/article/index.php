@@ -29,7 +29,7 @@ $this->title = 'zVintauge | Blog';
 										<h2 class="entry-title"><a href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h2>
 										<span class="cat-links">
 											<?php if(!empty($article->category->title)){
-												echo Html::a($article->category->title, ['category/', 'id'=>$article->category->id]);
+												echo Html::a($article->category->title, ['category/', 'slug'=>$article->category->slug]);
 											}?>
 										</span>
 									</div>

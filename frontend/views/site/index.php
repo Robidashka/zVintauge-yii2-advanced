@@ -66,7 +66,7 @@ $this->title = $title;?>
 										<h3><a href="<?= Url::toRoute(['article/view', 'slug'=>$article->slug])?>"><?= $article->title;?></a></h3>
 										<span class="cat-links">
 											<?php if(!empty($article->category)){
-												echo Html::a($article->category->title, ['article/category', 'id' => $article->category->id]);
+												echo Html::a($article->category->title, ['/category', 'slug'=>$article->category->slug]);
 											}?>
 										</span>
 										<p><?= $article->description;?></p>

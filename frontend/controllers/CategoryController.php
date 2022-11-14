@@ -52,12 +52,10 @@ class CategoryController extends Controller
 
     public function actionIndex($slug)
     {
-        $query = Article::getArticlesPosted(['slug'=>$slug]);
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
-        $articles = $query->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+        $category = Category::find()->where(['slug' => $slug])->one();
+        $data = $category->getArticlesByCategory();
+        $articles = $data['articles'];
+        $pagination = $data['pagination'];
 
         return $this->render('index', [
             'articles' => $articles,

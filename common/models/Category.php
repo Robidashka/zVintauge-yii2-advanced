@@ -44,6 +44,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Article::className(), ['category_id' => 'id']);
     }
+    
 
     public function getArticlesCount()
     {
@@ -54,15 +55,14 @@ class Category extends \yii\db\ActiveRecord
     {
         return Category::find()->all();
     }
+
+
     
-    public static function getArticlesByCategory($id)
+    public function getArticlesByCategory()
     {
-        $query = Article::find()->where(['category_id'=>$id]);
-
+        $query = Article::find()->where(['category_id'=>$this->id])->andWhere(['status'=>1])->orderBy('updated_at desc');
         $count = $query->count();
-
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>6]);
-
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>2]);
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();

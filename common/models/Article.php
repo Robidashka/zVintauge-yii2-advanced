@@ -61,7 +61,6 @@ class Article extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['category_id'], 'number'],
             [['status'], 'number'],
-            [['main_image'], 'required'],
             [['main_image'], 'file', 'extensions' => ['jpg', 'png', 'jpeg', 'gif'], 'maxFiles' => 1],
         ];
     }

@@ -47,7 +47,7 @@ AppAsset::register($this);
     						<button class="dropbtn logout-btn"><span>CATEGORY</span></button>
     						<div class="dropdown-content">
 								<?php if(!empty($category)): foreach($category as $category):?> 
-									<?php echo Html::a($category->title, ['category/', 'id'=>$category->id]);?>
+									<?php echo Html::a($category->title, ['category/', 'slug'=>$category->slug]);?>
 								<?php endforeach; endif;?>
     						</div>
   						</div> 
