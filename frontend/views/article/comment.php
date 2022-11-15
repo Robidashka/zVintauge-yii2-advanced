@@ -1,26 +1,29 @@
 <?php
-    $this->registerJs(
-        '$(".contact-form").submit(function(event) {
-            event.preventDefault(); // stopping submitting
-            var data = $(this).serializeArray();
-            var url = $(this).attr(\'action\'); 
-            $.ajax({
-                url: url,
-                type: \'post\',
-                dataType: \'json\',
-                data: data
-            })
-            .done(function(response) {
-                if (response.data.success == true) {
-                    event.target.reset();
-                    $( "#comments" ).load(window.location.href + " #comments" );
-                }
-            })
-            .fail(function() {
-                console.log("error");
-            });
-        });'
-    );
+
+use yii\bootstrap4\Html;
+
+$this->registerJs(
+    '$(".contact-form").submit(function(event) {
+        event.preventDefault(); // stopping submitting
+        var data = $(this).serializeArray();
+        var url = $(this).attr(\'action\'); 
+        $.ajax({
+            url: url,
+            type: \'post\',
+            dataType: \'json\',
+            data: data
+        })
+        .done(function(response) {
+            if (response.data.success == true) {
+                event.target.reset();
+                $( "#comments" ).load(window.location.href + " #comments" );
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    });'
+);
 ?>
 <div id="comments">
     <?php if(!empty($comments)):?>
@@ -55,5 +58,8 @@
         <?php \yii\widgets\ActiveForm::end();?>
     </div><!--end leave comment-->
 <?php else:?>
-    <h5 class="center">Login or signup to write comments</h5>
+    <h5 class="center">
+        <?php echo Html::a('Login', '/login', ['class' => 'log-sig']);?> or 
+        <?php echo Html::a('signup', '/signup', ['class' => 'log-sig']);?> to write comments
+    </h5>
 <?php endif;?>

@@ -6,11 +6,11 @@ use Yii;
 use common\models\LoginForm;
 use yii\web\Controller;
 use common\models\User;
-use frontend\models\SignupForm;
+use common\models\SignupForm;
 
 class AuthController extends Controller
 {
-public function actionLogin()
+    public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -37,17 +37,18 @@ public function actionLogin()
     {
         $model = new SignupForm();
 
-        if(Yii::$app->request->isPost)
-        {
-            $model->load(Yii::$app->request->post());
-            if($model->signup())
-            {
-                return $this->redirect(['auth/login']);
-            }
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($model->signup()) {
+                $user = $model->getUser($model->username);
+                Yii::$app->user->login($user, 3600 * 24 * 30);
+                return $this->goHome();
+            } 
+
         }
-        
+
         return $this->render('/auth/signup', [
-            'model'=>$model
+            'model' => $model
         ]);
     }
 }

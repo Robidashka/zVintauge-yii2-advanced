@@ -1174,3 +1174,8 @@ li.disabled {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.log-sig {
+    color: #505050;
+    text-decoration:underline;
+}
