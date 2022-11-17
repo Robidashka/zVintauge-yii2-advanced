@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use dvizh\seo\models\Seo;
+use yii\widgets\ActiveForm;
 
 if(!$title = $article->seo->title) {
 	$title = "{$seo->title}";
@@ -53,6 +54,7 @@ $this->title = $title;?>
 							<div class="viewed"> 
 								<p class="viewed-1 border-view">&#128065</p> 
 								<p class="viewed-2"><?= (int) $article->viewed;?></p>
+								<button data-trigger>Open modal</button>
 							</div>
 						</div>
 					</article>
@@ -74,3 +76,56 @@ $this->title = $title;?>
 		</div>
 	</div>
 </section>
+<div class="modal-container">
+	<div class="modal-content">
+		<button class="close">x</button>
+		<h1>Enter your desired mail to send</h1>
+		<?php $form = \yii\widgets\ActiveForm::begin(['id' => 'form-signup'])?>
+        <div class="form-group">
+            <div class="col-md-12">
+                <?= $form->field($mailing, 'email')->textarea(['class'=>'form-control','placeholder'=>'Enter your email'])->label(false)?>
+				<?= $form->field($mailing, 'agree')->checkbox([
+            		'template' => "<div class=\"agree\"> {label} {input}</div>\n<div class=\"\">{error}</div>",
+        		]) ?>
+            </div>
+        </div>
+        <center><button type="submit" class="com-btn">I want newsletter</button></center>
+        <?php \yii\widgets\ActiveForm::end();?>
+	</div>
+</div>
+<script>
+	(function(){
+    var modal = document.querySelector('.modal-container');
+    var closeButton = document.querySelector('.close');
+    var modalTriggers = document.querySelectorAll('[data-trigger]');
+  
+    var isModalOpen = false;
+    var pageYOffset = 0;
+  
+    var openModal = function() {
+      pageYOffset = window.pageYOffset;
+      modal.classList.add('is-open');
+      isModalOpen = true;
+    }
+  
+    var closeModal = function() {
+      modal.classList.remove('is-open');
+      isModalOpen = false;
+    }
+  
+    var onScroll = function(e) {
+      if (isModalOpen) {
+        e.preventDefault();
+        window.scrollTo(0, pageYOffset);
+      }
+    }
+  
+    modalTriggers.forEach(function(item) { 
+      item.addEventListener('click', openModal);
+    })
+  
+    document.addEventListener('scroll', onScroll);
+  
+    closeButton.addEventListener('click', closeModal);
+  })();
+</script>
