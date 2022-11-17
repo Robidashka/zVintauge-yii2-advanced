@@ -31,10 +31,16 @@ $this->title = $title;?>
 	<div class="wrap-container">
 		<!-----------------content-box-1-------------------->
 		<section class="content-box box-1">
-            <div class="item">
-				<?php if(!empty($page->slider)){
-					echo Html::img($page->slider, ['style' => 'width: 1000px']);
-				}?>
+			<div class="item1">
+				<div class="slider">
+					<?php if(!empty($page->slider)): foreach ($page->slider as $slider):?>
+						<div class="item">
+							<?php if(!empty($page->slider)){echo Html::img($slider->href, ['style' => 'width: 1000px; object-fit: cover; height: 560px']);}?>
+						</div>
+						<a class="previous" onclick="previousSlide()">&#10094;</a>
+						<a class="next" onclick="nextSlide()">&#10095;</a>
+					<?php endforeach;endif;?>
+				</div>
 	        </div>
 			<div class="zerogrid">
 				<div class="wrap-box"><!--Start Box-->
