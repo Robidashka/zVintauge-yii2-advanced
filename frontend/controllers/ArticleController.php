@@ -11,6 +11,7 @@ use common\models\LoginForm;
 use common\models\ContactForm;
 use yii\data\Pagination;
 use common\models\Article;
+use common\models\Mailer;
 use common\models\Category;
 use yii\helpers\ArrayHelper;
 use frontend\models\CommentForm;
@@ -74,12 +75,14 @@ class ArticleController extends Controller
         $article = Article::find()->where(['slug'=>$slug])->one();
         $comments = $article->getArticleComments();
         $model = new CommentForm();
-        $article->viewedCount();
+        $article -> viewedCount();
+        $mailer = new Mailer();
 
         return $this->render('view', [
-            'article'=>$article,
-            'comments'=>$comments,
-            'model'=>$model
+            'article' => $article,
+            'comments' => $comments,
+            'model' => $model,
+            'mailer' => $mailer
         ]);
     }
 
@@ -131,5 +134,13 @@ class ArticleController extends Controller
             }
         }
     }
-    
+
+    public function actionMailer($slug)
+    {
+        $mailer = new Mailer();
+        if ($mailer->load(Yii::$app->request->post()) && $mailer->save()) {
+            return $this->redirect(['/article/view', 'slug' => $slug]);
+        }
+        return $this->redirect(['/article/view', 'slug' => $slug]);
+    }
 }
