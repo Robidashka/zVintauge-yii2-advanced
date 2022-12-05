@@ -14,7 +14,9 @@ class m221201_102137_create_mailer_table extends Migration
     {
         $this->createTable('{{%mailer}}', [
             'id' => $this->primaryKey(),
-            'email' => $this->string(255),
+            'post_id' => $this->integer()->notNull(),
+            'subscriber_id' => $this->integer()->notNull(),
+            'end' => $this->boolean()->defaultValue(0),
         ]);
     }
 
