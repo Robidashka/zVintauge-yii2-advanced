@@ -7,7 +7,6 @@ use common\models\Article;
 
 class Mailer extends \yii\db\ActiveRecord
 {
-    public $agree = true;
 
     public static function tableName()
     {
@@ -19,8 +18,7 @@ class Mailer extends \yii\db\ActiveRecord
         return [
             [['post_id', 'subscriber_id'], 'required'],
             [['post_id', 'subscriber_id'], 'integer'],
-            [['agree'], 'unique'],
-            [['end', 'agree'],'boolean'],
+            [['end'],'boolean'],
         ];
     }
 

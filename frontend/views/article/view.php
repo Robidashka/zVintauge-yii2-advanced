@@ -56,10 +56,7 @@ $this->title = $title;?>
 								<p class="viewed-2"><?= (int) $article->viewed;?></p>
 							</div>
 							<div>
-								<?= $this->render('mailer', [
-									'article'=>$article,
-                					'mailer'=>$mailer
-            					])?>
+								<?= common\widgets\SubscriptionWidget::widget() ?>
 							</div>
 						</div>
 					</article>

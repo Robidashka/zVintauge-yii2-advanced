@@ -1,17 +1,17 @@
-( function( $ ) {
-$( document ).ready(function() {
-$('#cssmenu').prepend('<div id="menu-button">Menu</div>');
-	$('#cssmenu #menu-button').on('click', function(){
-		var menu = $(this).next('ul');
-		if (menu.hasClass('open')) {
-			menu.removeClass('open');
-		}
-		else {
-			menu.addClass('open');
-		}
-	});
-});
-} )( jQuery );
+(function ($) {
+    $(document).ready(function () {
+        $('#cssmenu').prepend('<div id="menu-button">Menu</div>');
+        $('#cssmenu #menu-button').on('click', function () {
+            var menu = $(this).next('ul');
+            if (menu.hasClass('open')) {
+                menu.removeClass('open');
+            }
+            else {
+                menu.addClass('open');
+            }
+        });
+    });
+})(jQuery);
 
 let slideIndex = 1;
 showSlides(slideIndex);
@@ -43,3 +43,27 @@ function showSlides(n) {
     }
     slides[slideIndex - 1].style.display = "block";
 }
+
+
+$(document).on('click', '#subscription', function (e) {
+    e.preventDefault(0);
+
+    var data = $(this).serializeArray();
+    var url = $(this).attr('action/subscription'); 
+
+    console.log(data);
+
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        data: data,
+    })
+
+    .done(function(response) {
+        if (response.data.success == true) {
+            e.target.reset();
+            $( "#modalC" ).load(window.location.href + " #modalC" );
+        }
+    })
+})

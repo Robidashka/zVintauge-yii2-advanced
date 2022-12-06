@@ -12,7 +12,9 @@ use common\models\ContactForm;
 use yii\data\Pagination;
 use common\models\Article;
 use common\models\Mailer;
+use common\models\Subscription;
 use common\models\Category;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use frontend\models\CommentForm;
 use yii\data\ActiveDataProvider;
@@ -76,13 +78,13 @@ class ArticleController extends Controller
         $comments = $article->getArticleComments();
         $model = new CommentForm();
         $article -> viewedCount();
-        $mailer = new Mailer();
+        $subscription = new Subscription();
 
         return $this->render('view', [
             'article' => $article,
             'comments' => $comments,
             'model' => $model,
-            'mailer' => $mailer
+            'subscription' => $subscription,
         ]);
     }
 
@@ -110,6 +112,7 @@ class ArticleController extends Controller
     public function actionComment($id, $slug)
     {
         $model = new CommentForm();
+
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -135,12 +138,29 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionMailer($slug)
+    public function actionSubscription()
     {
-        $mailer = new Mailer();
-        if ($mailer->load(Yii::$app->request->post()) && $mailer->save()) {
-            return $this->redirect(['/article/view', 'slug' => $slug]);
+        $subscription = new Subscription();
+
+        if (Yii::$app->request->isPjax) {
+
+            if ($subscription->load(Yii::$app->request->post()) && $subscription->validate()){
+                $email = Html::encode($subscription->email);
+                $subscription-> email = $data['email'];
+                $subscription-> subs_time = (string) time();
+
+                if ($subscription->save()){                
+                
+                    echo "<p style='color:green'>You subscribed!</p>";
+
+                } 
+            } else {
+                echo "<p style='color:red'>Subscription error.</p>";
+
+                if(strpos($subscription->errors['email'][0], 'already been taken') !== false) {
+                    echo "<p style='color:red'>You are already subscribed!</p>";
+                }          
+            }
         }
-        return $this->redirect(['/article/view', 'slug' => $slug]);
     }
 }
