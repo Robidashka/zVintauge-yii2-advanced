@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use dvizh\seo\models\Seo;
+
 use yii\widgets\ActiveForm;
 
 if(!$title = $article->seo->title) {
@@ -63,7 +64,7 @@ $this->title = $title;?>
 					<div class="zerogrid">
 						<div class="comments-are">
 							<div id="comment">
-								<div>
+								<div> 
 									<?= $this->render('comment', [
                 						'article'=>$article,
                 						'comments'=>$comments,

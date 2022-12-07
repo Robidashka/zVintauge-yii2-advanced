@@ -18,10 +18,9 @@ class Subscription extends \yii\db\ActiveRecord
         return [
             [['email'], 'required'],
             [['email'], 'email'],
-            [['email'], 'trim'],
             [['email'], 'unique'],
             [['agree'], 'boolean'],
-            [['email', 'subs_time'], 'string', 'max' => 255],
+            [['subs_time','email'], 'string', 'max' => 255],
         ];
     }
 

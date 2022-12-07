@@ -109,14 +109,16 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function actionComment($id, $slug)
+    public function actionComment()
     {
         $model = new CommentForm();
+        $post = Yii::$app->request->post();
+        $id = $post['id'];
 
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-            if ($model->load(Yii::$app->request->post()) && $model->saveComment($id)) {
+            if ($post &&  $model->saveComment($id,$post['formComment'])) {
                 return [
                     'data' => [
                         'success' => true,
@@ -140,27 +142,24 @@ class ArticleController extends Controller
 
     public function actionSubscription()
     {
+
         $subscription = new Subscription();
 
-        if (Yii::$app->request->isPjax) {
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
 
-            if ($subscription->load(Yii::$app->request->post()) && $subscription->validate()){
-                $email = Html::encode($subscription->email);
-                $subscription-> email = $data['email'];
-                $subscription-> subs_time = (string) time();
+            
+            if (!empty($data)) {
+                $subscription->email = $data['email'];
+                $subscription->subs_time = (string) time();
 
                 if ($subscription->save()){                
-                
+
                     echo "<p style='color:green'>You subscribed!</p>";
 
                 } 
-            } else {
-                echo "<p style='color:red'>Subscription error.</p>";
-
-                if(strpos($subscription->errors['email'][0], 'already been taken') !== false) {
-                    echo "<p style='color:red'>You are already subscribed!</p>";
-                }          
             }
+
         }
     }
 }

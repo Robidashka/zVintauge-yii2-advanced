@@ -9,6 +9,10 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'request' => [
+            'cookieValidationKey' => '',
+            'enableCsrfValidation' => false,
+        ], 
     ],
     'modules' => [
         'files' => [

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 ?>
+
 <center><button class="subscribe" data-trigger><a class="log-sig inline">Subscribe</a> <p class="inline">to mailing list?</p></button></center>
 <div class="modal-container">
 	<div id="modalC" class="modal-content">
@@ -15,11 +16,11 @@ use yii\widgets\Pjax;
 		</a>
 		<h1 class="modal-title">Enter your desired mail to send</h1>
     <?php Pjax::begin(['enablePushState' => false, 'id' => 'pjax_form']); ?>
-		    <?php $form = ActiveForm::begin([ 'options' => ['data-pjax' => true],])?>
+		    <?php $form = ActiveForm::begin([ 'class' => 'subscribe-form'])?>
         <div class="form-group">
             <div class="col-md-12">
-            <?= $form->field($subscription, 'email')->textInput(['class'=>'form-control','placeholder'=>'Enter your email'])->label(false)?>
-            <?= $form->field($subscription, 'agree')->checkbox(['label' => 'I agree to receive emails about new posts'])?>
+              <?= $form->field($subscription, 'email')->textInput(['class'=>'form-control subscribe-email','placeholder'=>'Enter your email'])->label(false)?>
+              <?= $form->field($subscription, 'agree')->checkbox(['label' => 'I agree to receive emails about new posts'])?>
             </div>
         </div>
         <center><button id="subscription" class="com-btn">I want newsletter</button></center>
@@ -63,6 +64,4 @@ use yii\widgets\Pjax;
 
     closeButton.addEventListener('click', closeModal);
     })();
-
-
 </script>
