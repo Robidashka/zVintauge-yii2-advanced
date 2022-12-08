@@ -44,69 +44,34 @@
 //     slides[slideIndex - 1].style.display = "block";
 // }
 
-// $(".subscribe-form").submit(function(e) {
 $(document).on('click', '#subscription', function (e) {
     e.preventDefault();
 
     var sub = $('.subscribe-email').val();
-    // var url = $(this).attr('/action/subscription');
-
-    console.log(sub);
-
 
     $.post(
         "/article/subscription", {
         email: sub,
         agree: true,
     }, function (data) {
+        $('#success_modal').html(data);
         console.log(data);
     });
-    // $.ajax({
-    //     url: '/article/subscription',
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: {
-    //         email: sub
-    //     },
-    // }).done(function (response) {
-    //         if (response.data.success == true) {
-    //             e.target.reset();
-    //             $("#modalC").load(window.location.href + " #modalC");
-    //         }
-    //     })
 })
 
-$(document).on('click','#comment-btn',function (e) {
-    e.preventDefault(); // stopping submitting
+$(document).on('click','#comment-btn', function (e) {
+    e.preventDefault();
+
     let formComment = $('.contact-form').find("#commentform-comment").val();
     let id = $(this).data('article-id');
-    // var data = form.serializeArray();
-    // var url = $(this).attr('action'); 
 
     $.post(
         "/article/comment", {
             formComment:formComment,
             id:id
     }, function (data) {
-        $.pjax.reload('#pjax-comment-show');
+        $('.clear_session').html('');
+        $('#comments').append(data);
+        $('#contact-form').trigger("reset");
     });
-
-    // $.ajax({
-    //     url: "/article/comment",
-    //     type: 'post',
-    //     dataType: 'json',
-    //     data: {
-    //         formComment:formComment,
-    //         id:id
-    //     }
-    // })
-    // .done(function(response) {
-    //     if (response.data.success == true) {
-    //         $.pjax.reload({container: "#pjax-comment-show", timeout: false});
-    //         $.pjax.reload('#pjax-comment-show');
-    //     }
-    // })
-    // .fail(function() {
-    //     console.log("error");
-    // });
 });

@@ -26,10 +26,8 @@ class CommentForm extends Model
         $comment->article_id = $article_id;
         $comment->status = 0;
         $comment->date = date('Y-m-d');
-        if (!$comment->save()) {
-           var_dump($comment->errors);die;
+        if ($comment->save()) {
+            return $comment;
         }
-        return $comment->save();
-
     }
 }

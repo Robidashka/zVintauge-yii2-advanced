@@ -1263,7 +1263,7 @@ li.disabled {
 	width: 100%; 
     height: 100%; 
     max-width: 500px; 
-    max-height: 330px;
+    max-height: 325px;
 	padding: 20px;
     background-color: #fff;
     border-radius: 3px;
@@ -1294,7 +1294,7 @@ li.disabled {
     margin-bottom: 20px;
 }
 
-#mailer-agree {
+#subscription-agree {
     width: 15px;
     margin-right: 10px;
     display: inline;
@@ -1308,4 +1308,13 @@ li.disabled {
 	height: 16px;
 	text-decoration: none;
 	width: 16px;
+}
+
+.field-subscription-agree label{
+    display: inline;
+}
+
+.clear_session {
+    margin-bottom: 10px;
+    color: green;
 }

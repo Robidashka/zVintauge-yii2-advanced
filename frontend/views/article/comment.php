@@ -30,7 +30,7 @@ use yii\widgets\Pjax;
         <?php endif;?>
         
         <?php $form = \yii\widgets\ActiveForm::begin([
-            'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
+            'options'=>['class'=>'form-horizontal contact-form', 'id'=>'contact-form', 'role'=>'form']])?>
         <div class="form-group">
             <div class="col-md-12">
                 <?= $form->field($model, 'comment')->textarea(['class'=>'form-control','placeholder'=>'Write Message'])->label(false)?>

@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 ?>
-
 <center><button class="subscribe" data-trigger><a class="log-sig inline">Subscribe</a> <p class="inline">to mailing list?</p></button></center>
 <div class="modal-container">
 	<div id="modalC" class="modal-content">
@@ -24,6 +23,7 @@ use yii\widgets\Pjax;
             </div>
         </div>
         <center><button id="subscription" class="com-btn">I want newsletter</button></center>
+        <div id = "success_modal" style="text-align:center"></div>
       <?php ActiveForm::end();?>
     <?php Pjax::end();?>
 	</div>

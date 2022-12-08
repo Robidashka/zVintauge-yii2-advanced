@@ -117,49 +117,38 @@ class ArticleController extends Controller
 
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $comment = $model->saveComment($id,$post['formComment']);
+            
+            if ($post && $comment) {
+                Yii::$app->session->setFlash('success', "Your comment was send successfully.");
 
-            if ($post &&  $model->saveComment($id,$post['formComment'])) {
-                return [
-                    'data' => [
-                        'success' => true,
-                        'model' => $model,
-                        'message' => 'Model has been saved.',
-                    ],
-                    'code' => 0,
-                ];
+               return $this->renderAjax('_ajaxComment', [
+                'comment'=>$comment
+               ]);
+
             } else {
-                return [
-                    'data' => [
-                        'success' => false,
-                        'model' => null,
-                        'message' => 'An error occured.',
-                    ],
-                    'code' => 1, // Some semantic codes that you know them for yourself
-                ];
+                Yii::$app->session->setFlash('error', "Something went wrong :(");
             }
         }
     }
 
     public function actionSubscription()
     {
-
         $subscription = new Subscription();
 
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
 
-            
             if (!empty($data)) {
                 $subscription->email = $data['email'];
                 $subscription->subs_time = (string) time();
 
-                if ($subscription->save()){                
-
-                    echo "<p style='color:green'>You subscribed!</p>";
-
-                } 
-            }
-
+                if ($subscription->save()){       
+                    return "<p style='color:green; margin-bottom: 0px;'>You subscribed!</p>";
+                } else {
+                    return "<p style='color:red; margin-bottom: 0px;'>Subscription error.</p>";
+                }
+            } 
         }
     }
 }
