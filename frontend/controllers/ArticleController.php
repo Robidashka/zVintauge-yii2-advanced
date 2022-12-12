@@ -151,4 +151,10 @@ class ArticleController extends Controller
             } 
         }
     }
+ 
+    public function actionMail(){    
+        $model = new Mailer();
+        $model->send(); 
+        return 0;
+    }
 }

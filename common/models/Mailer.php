@@ -16,8 +16,8 @@ class Mailer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_id', 'subscriber_id'], 'required'],
-            [['post_id', 'subscriber_id'], 'integer'],
+            [['post_slug', 'subscriber_id'], 'required'],
+            [['subscriber_id', 'post_id'], 'integer'],
             [['end'],'boolean'],
         ];
     }
@@ -34,12 +34,13 @@ class Mailer extends \yii\db\ActiveRecord
 
     public function send()
     {
-        $query = $this->find()->limit(1)->orderBy('post_id DESC')->all();
+        $query = Mailer::find()->limit(1)->orderBy('post_id DESC')->all();
         $last_subscribe = $query[0];
-
-        if ($last_subscribe->end == 1 or count($last_subscribe) == 0) {
+        // echo '<pre>';
+        // var_dump($query);die;
+        if ($last_subscribe->end == 1 || count($last_subscribe) == 0) {
             $last_post = $last_subscribe->post_id or $last_post = 0;
-            $post = Article::find()->limit(1)->where(['>', 'id', $last_post])->andWhere(['status' => self::ARTICLE_POSTED])->all();
+            $post = Article::find()->limit(1)->where(['>', 'id', $last_post])->andWhere(['status' => 1])->all();
 
             if (!$post) exit;
             $this->post_id = $post[0]->id;
@@ -56,7 +57,7 @@ class Mailer extends \yii\db\ActiveRecord
         if ($max_count > 10) $max_count = 10;
         foreach ($subscriptions as $key => $sub){
             $subscriber_id = $sub->id;
-            $this->sendSub($sub->email, $last_subscribe->post_id);
+            $this->sendEmail($sub->email, $last_subscribe->post_id);
             if ($key >= ($max_count-1)) {
                 $send_subscr = self::findOne($last_subscribe->id);
                 $send_subscr->subscriber_id = $subscriber_id;
@@ -72,13 +73,22 @@ class Mailer extends \yii\db\ActiveRecord
         }    
     }
 
-    public static function sendEmail()
+    public function sendEmail($email,$post_id)
     {
+        $home_url = 'http://zvintauge-yii2-advanced';
+        $article = Article::find()->where(['post_id'=>$post_id])->one();
+        $post_url = $home_url.'/article/view?slug='. $article->slug;
+        $msg = "Hello! You have subscribed to receive notifications about new articles on the $home_url site. We inform you that a new article has been published. To view go to $post_url";
+        $msg_html  = "<html><body style='font-family:Arial,sans-serif;'>";
+        $msg_html .= "<h3 style='font-weight:bold;border-bottom:1px dotted #ccc;'>Hello! You are subscribed to receive notifications about new articles on the site " . $home_url . "</h3>\r\n";
+        $msg_html .= "<p><strong>We inform you that a new article has been published. To view go to </strong><a href='". $post_url ."'>$post_url</a></p>\r\n";
+        $msg_html .= "</body></html>";
         Yii::$app->mailer->compose()
-        ->setTo('test@mail.ru')
-        ->setFrom(Yii::$app->params['adminEmail'])
-        ->setSubject('test')
-        ->setTextBody('test')
-        ->send();
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setTo($email) 
+            ->setSubject('New article notification')
+            ->setTextBody($msg)
+            ->setHtmlBody($msg_html)
+            ->send();    
     }
 }
