@@ -153,6 +153,6 @@ class Article extends \yii\db\ActiveRecord
 
     public static function getArticlesPosted($filters = [])
     {
-        return Article::find()->where(['status'=>1])->andWhere($filters)->orderBy('updated_at desc');
+        return Article::find()->where(['status'=>1])->andWhere($filters)->orderBy('created_at desc');
     }
 }

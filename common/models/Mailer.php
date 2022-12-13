@@ -69,8 +69,6 @@ class Mailer extends \yii\db\ActiveRecord
         foreach ($subscriptions as $key => $sub){
             $subscriber_id = $sub->id;
             $this->sendEmail($sub->email, $last_subscribe->post_id);
-            // echo '<pre>';
-            // var_dump($last_subscribe->post_id);die;
             if ($key >= ($max_count-1)) {
                 $send_subscr = self::findOne($last_subscribe->id);
                 $send_subscr->subscriber_id = $subscriber_id;
