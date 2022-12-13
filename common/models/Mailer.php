@@ -7,6 +7,7 @@ use common\models\Article;
 
 class Mailer extends \yii\db\ActiveRecord
 {
+    const ARTICLE_POSTED = 1;
 
     public static function tableName()
     {
@@ -16,7 +17,7 @@ class Mailer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_slug', 'subscriber_id'], 'required'],
+            [['post_id', 'subscriber_id'], 'required'],
             [['subscriber_id', 'post_id'], 'integer'],
             [['end'],'boolean'],
         ];
@@ -36,11 +37,21 @@ class Mailer extends \yii\db\ActiveRecord
     {
         $query = Mailer::find()->limit(1)->orderBy('post_id DESC')->all();
         $last_subscribe = $query[0];
-        // echo '<pre>';
-        // var_dump($query);die;
-        if ($last_subscribe->end == 1 || count($last_subscribe) == 0) {
-            $last_post = $last_subscribe->post_id or $last_post = 0;
-            $post = Article::find()->limit(1)->where(['>', 'id', $last_post])->andWhere(['status' => 1])->all();
+        
+        if (empty($last_subscribe)) {
+            $last_post = $last_post = 0;
+            $post = Article::find()->limit(1)->where(['>', 'id', $last_post])->andWhere(['status' => self::ARTICLE_POSTED])->all();
+
+            if (!$post) exit;
+            $this->post_id = $post[0]->id;
+            $this->subscriber_id = 0;
+            $this->end = 0;
+            $this->save();
+            exit;
+        } 
+        if ($last_subscribe->end == 1) {
+            $last_post = $last_subscribe->post_id;
+            $post = Article::find()->limit(1)->where(['>', 'id', $last_post])->andWhere(['status' => self::ARTICLE_POSTED])->all();
 
             if (!$post) exit;
             $this->post_id = $post[0]->id;
@@ -49,7 +60,7 @@ class Mailer extends \yii\db\ActiveRecord
             $this->save();
             exit;
         }
-
+        
         $last_id = $last_subscribe->subscriber_id;
         $subscriptions = Subscription::find()->where(['>', 'id', $last_id])->all();
         $max_count = count($subscriptions);
@@ -58,6 +69,8 @@ class Mailer extends \yii\db\ActiveRecord
         foreach ($subscriptions as $key => $sub){
             $subscriber_id = $sub->id;
             $this->sendEmail($sub->email, $last_subscribe->post_id);
+            // echo '<pre>';
+            // var_dump($last_subscribe->post_id);die;
             if ($key >= ($max_count-1)) {
                 $send_subscr = self::findOne($last_subscribe->id);
                 $send_subscr->subscriber_id = $subscriber_id;
@@ -76,7 +89,7 @@ class Mailer extends \yii\db\ActiveRecord
     public function sendEmail($email,$post_id)
     {
         $home_url = 'http://zvintauge-yii2-advanced';
-        $article = Article::find()->where(['post_id'=>$post_id])->one();
+        $article = Article::find()->where(['id'=>$post_id])->one();
         $post_url = $home_url.'/article/view?slug='. $article->slug;
         $msg = "Hello! You have subscribed to receive notifications about new articles on the $home_url site. We inform you that a new article has been published. To view go to $post_url";
         $msg_html  = "<html><body style='font-family:Arial,sans-serif;'>";
