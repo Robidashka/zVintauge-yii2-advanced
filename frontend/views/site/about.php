@@ -5,30 +5,35 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-if(!$title = $page->seo->title) {
-	$title = "{$seo->title}";
+if(!empty($page)){
+	if(!$title = $page->seo->title) {
+		$title = "{$seo->title}";
+	}
+	
+	if(!$description = $page->seo->description) {
+		$description = "{$seo->description}";
+	}
+	
+	if(!$keywords = $page->seo->keywords) {
+		$keywords = '';
+	}
+	
+	$this->registerMetaTag([
+		'name' => 'description',
+		'content' => $description,
+	]);
+	
+	$this->registerMetaTag([
+		'name' => 'keywords',
+		'content' => $keywords,
+	]);
 }
 
-if(!$description = $page->seo->description) {
-	$description = "{$seo->description}";
+if(!empty($page)){
+	$this->title = $title;
+	$this->params['breadcrumbs'][] = $this->title;
 }
-
-if(!$keywords = $page->seo->keywords) {
-	$keywords = '';
-}
-
-$this->registerMetaTag([
-	'name' => 'description',
-	'content' => $description,
-]);
-
-$this->registerMetaTag([
-	'name' => 'keywords',
-	'content' => $keywords,
-]);
-
-$this->title = $title;
-$this->params['breadcrumbs'][] = $this->title;?>
+?>
 <section id="container">
 	<div class="wrap-container">
 		<!-----------------content-box-1-------------------->
