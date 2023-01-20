@@ -54,8 +54,10 @@ class SiteController extends Controller
     {
         $articles = Article::find()->where(['status'=>1])->all();
         $page = Page::find()->where(['key' => 'home'])->one();
-        $block = $page->getIndexedBlockArray();
-
+        if(!empty($page)){
+            $block = $page->getIndexedBlockArray();
+        }
+        
         return $this->render('index',[
             'articles' => $articles, 
             'page' => $page,
@@ -66,7 +68,9 @@ class SiteController extends Controller
     public function actionAbout()
     {
         $page = Page::find()->where(['key' => 'about'])->one();
-        $block = $page->getIndexedBlockArray();
+        if(!empty($page)){
+            $block = $page->getIndexedBlockArray();
+        }
         
         return $this->render('about',[
             'page' => $page,
