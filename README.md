@@ -2,6 +2,8 @@
 
 <h2>Установка</h2>
 
+Для развертки сайта требуется PHP 8+
+
 `git clone https://github.com/Robidashka/zVintauge-yii2-advanced.git`<br>
 
 `composer install`<br>
